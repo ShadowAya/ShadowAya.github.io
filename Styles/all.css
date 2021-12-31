@@ -10,6 +10,17 @@ body {
     background-position: center;
     color: white;
 }
+a:link {
+    text-decoration: none;
+}
+  
+a:hover {
+    border-bottom: 1px dotted;
+}
+  
+a:active {
+    border-bottom: 1px dotted;
+}
 
 ::-webkit-scrollbar {
     width: 20px;
