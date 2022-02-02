@@ -62,6 +62,7 @@ function notificationTop(type, title, text) {
 
 function closeNotification(element) {
     element.parentElement.classList.add("notification-close-class");
+    element.remove();
     setTimeout(() => {
         element.parentElement.remove();
     }, 295);
