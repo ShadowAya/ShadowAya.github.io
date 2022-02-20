@@ -3,30 +3,30 @@
 * {
     font-family: "Zen Kaku Gothic New";
 }
-html, body, body>div {
+html, body, body>div:first-child {
     height: 100%;
     overflow: hidden;
     margin: 0;
 }
-body>div {
+body>div:first-child {
     display: flex;
     flex-direction: row;
     gap: 50px;
 }
-body>div > div {
+body>div:first-child > div {
     margin-top: 30px;
     flex: 1;
     height: 100%;
     overflow: scroll;
 }
-body>div > div:first-child {
+body>div:first-child > div:first-child {
     margin-left: 30px;
 }
-body>div > div:last-child {
+body>div:first-child > div:last-child {
     margin-right: 30px;
 }
 
-body>div > div::-webkit-scrollbar {
+body>div:first-child > div::-webkit-scrollbar {
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none;  /* Firefox */
     display: none;  /* Safari and Chrome */
