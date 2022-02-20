@@ -167,3 +167,20 @@ function selectDefaultRadioButton() {
         document.querySelector('input[name="password-type"][value="1"]').checked = true;
     }
 }
+
+function saveZIP() {
+    let passwordType = document.querySelector('input[name="password-type"]:checked').value;
+    let password;
+    if (passwordType == 'none') {
+        password = null;
+    } else if (passwordType == 'new') {
+        password = document.getElementById("new-password-value").value;
+        if (password == '') {
+            password = null;
+        }
+    } else {
+        password = passwordValues[Number(passwordType)]
+    }
+
+
+}
