@@ -3,8 +3,33 @@
 * {
     font-family: "Zen Kaku Gothic New";
 }
+html, body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+}
 body {
-    padding: 30px 0 0 30px;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+body > div {
+    margin-top: 30px;
+    flex: 1;
+    height: 100%;
+    overflow: scroll;
+}
+body > div:first-child {
+    margin-left: 30px;
+}
+body > div:last-child {
+    margin-right: 30px;
+}
+
+body > div::-webkit-scrollbar {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+    display: none;  /* Safari and Chrome */
 }
 
 h1 {
@@ -18,16 +43,33 @@ h2 {
     margin-top: 30px;
 }
 
+.input-div {
+    position: relative;
+}
+
 .input-div > h3 {
-    z-index: -2;
+    z-index: 2;
     user-select: none;
     font-weight: 400;
-    position: absolute;
+    position:absolute;
     margin: 20px 0 0 10px;
     transition: 0.15s;
 }
 
+input {
+    border-radius: 10px;
+    padding: 10px;
+    border-width: 0;
+    color: black;
+    font-size: 20px;
+}
+input:focus {
+    outline: none;
+}
+
 .input-div > textarea {
+    position: relative;
+    z-index: 20;
     resize: none;
 
     margin: 25px 0 5px 0;
@@ -38,21 +80,12 @@ h2 {
     font-size: 20px;
 
     background: rgb(255,255,255);
-    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(221,221,221,1) 25%, rgba(255,255,255,1) 50%, rgba(238,238,238,1) 75%, rgba(170,170,170,1) 100%);
 
-    width: 40vw;
+    width: calc(100% - 20px);
     height: 30px;
 }
 .input-div > textarea:focus {
     outline: none;
-}
-
-input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
 }
 
 /* The container */
@@ -60,7 +93,7 @@ input[type="checkbox"] {
     display: block;
     position: relative;
     padding-left: 28px;
-    margin-bottom: 8px;
+    margin-bottom: 3px;
     cursor: pointer;
     font-size: 15px;
     -webkit-user-select: none;
@@ -68,6 +101,13 @@ input[type="checkbox"] {
     -ms-user-select: none;
     user-select: none;
   }
+
+.checkmark-bigger-text {
+    font-size: 18px;
+}
+.checkmark-bigger-text > .checkmark {
+    margin-top: 4px;
+}
   
   /* Hide the browser's default checkbox */
   .checkmark-container input {
@@ -125,10 +165,24 @@ input[type="checkbox"] {
     transform: rotate(45deg);
   }
 
+  .circular-check .checkmark:after {
+      background-color: rgb(27, 27, 27);
+      top: 3px; left: 3px;
+      width: 15px;
+      height: 15px;
+      border: none;
+      border-width: 0;
+      border-radius: 10px;
+
+      -webkit-transform: none;
+      -ms-transform: none;
+      transform: none;
+  }
+
 .upload-container {
     display: block;
     height: 200px;
-    width: calc(40vw + 20px);
+    width: 100%;
 }
 
 .upload-container > input {
@@ -137,7 +191,7 @@ input[type="checkbox"] {
 
 .upload-container > div {
     height: 200px;
-    width: calc(40vw + 20px);
+    width: 100%;
     background-color: #2a2a2a;
     border-radius: 10px;
     text-align: center;
@@ -152,10 +206,123 @@ input[type="checkbox"] {
     height: 40px; width: 40px;
 }
 
-body {
+
+#passwords {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 20px;
 }
-body > div {
-    flex: 1;
+
+#passwords > div {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: black;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.stack-horizontal {
+    display: flex;
+    gap:15px;
+
+}
+.icon-squared {
+    width: 30px; height: 30px;
+    padding:10px;
+    max-width: 30px; max-height: 30px;
+    background-color: white;
+    color:black;
+    border-radius: 10px;
+}
+.icon-nextto-field {
+    margin-top: 25px;
+}
+.stack-horizontal > * {
+    flex:1;
+}
+.flex-nogrow {
+    flex-grow: 0;
+}
+
+#passwords > div > p {
+    font-size: 18px;
+    padding-left: 28px;
+}
+#passwords > div > h4 {
+    padding: 20px 0 0 28px;
+    color:#4d4d4d;
+}
+
+#passwords-container {
+    margin-bottom: 50px;
+}
+
+#passwords-container > div {
+    display: flex;
+    gap:15px;
+    align-items: stretch;
+}
+#passwords-container > div > * {
+    flex:1;
+}
+#passwords-container > div > *:first-child {
+    flex-grow: 0;
+    margin-top:12px;
+}
+#passwords-container > div > div:not([style]) {
+    padding-left:15px;
+    height: 51px;
+    line-height: 49px;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+
+    display: flex;
+    gap:10px;
+}
+#passwords-container > div > div > p:first-child {
+    color: black;
+}
+#passwords-container > div > div > p:last-child {
+    color: rgb(149, 149, 149);
+}
+
+#save {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+
+    height: 68px;width: 100%;
+    border-radius: 10px;
+    color: white;
+    background-color: white;
+    text-align: center;
+    transition: 0.3s;
+    font-size: 25px;
+    margin-bottom: 50px;
+
+    border: 3px solid white;
+
+    box-shadow: inset 0 68px 0 0 #151515
+}
+
+#save > svg {
+    min-height: 30px; min-width: 30px;
+}
+#save > p {
+    margin-bottom: 3px;
+}
+
+#save > * {
+    flex:1;
+    flex-grow: 0;
+}
+
+#save:hover, #save:focus {
+    color: black;
+    box-shadow: inset 0 0 0 0 #151515
 }
