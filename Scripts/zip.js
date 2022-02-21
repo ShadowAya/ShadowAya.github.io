@@ -177,32 +177,47 @@ function saveZIP() {
         return;
     }
 
-    if (passwordType == 'none') {
-        password = null;
-    } else if (passwordType == 'new') {
-        password = document.getElementById("new-password-value").value;
-        if (password == '') {
-            password = null;
+
+    if (passwordType == 'new') {
+        if (password != '') {
+            password = document.getElementById("new-password-value").value;
         }
     } else {
         password = passwordValues[Number(passwordType)]
     }
 
     let content;
-    let zip = new JSZip();
+    let writer = new zip.ZipWriter(new zip.BlobWriter("application/zip"),
+        password = password,
+        useWebWorkers = true,
+
+    );
 
     Array.from(document.getElementById("files-upload").files).forEach(file => {
-        zip.file(file.name, file)
+        //zip.file(file.name, file)
+
+        // add files
+
+        writer.add(
+            file.name,
+            new zip.BlobReader(file)
+        )
     });
 
-    if (password==null) {
-        zip.generateAsync({
+    if (password!=undefined) {
+        /*zip.generateAsync({
             type : "blob",
             password : "lmao",
             encryptStrength : 3
         }).then((content) => {
             saveAs(content, document.getElementById("patient-name").value+".zip")
-        })
+        })*/
+
+        URL.createObjectURL(await zipWriter.close()).then(
+            (content) => {
+                saveAs(content, document.getElementById("patient-name").value+".zip")
+            }
+        )
     }
     
     
