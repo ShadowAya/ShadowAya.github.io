@@ -33,10 +33,6 @@ window.addEventListener("load", () => {
         })
     });
 
-    document.getElementById("files-upload").addEventListener("change", (e) => {
-        console.log(e.target.files);
-    });
-
 });
 
 function animateThing(event) {
@@ -137,7 +133,6 @@ function newPassword() {
 
     refreshPasswordsHTML();
     document.querySelector(`input[name="password-type"][value="${whereToSave}"]`).checked = true;
-    console.log(passwordNames);
 }
 
 function removePassword(n) {
@@ -168,58 +163,109 @@ function selectDefaultRadioButton() {
     }
 }
 
-function saveZIP() {
+function getPassword() {
     let passwordType = document.querySelector('input[name="password-type"]:checked').value;
     let password;
-
-    if (document.getElementById("patient-name").value=="") {
-        alert("Missing patient's name")
-        return;
-    }
-
 
     if (passwordType == 'new') {
         if (password != '') {
             password = document.getElementById("new-password-value").value;
         }
     } else {
-        password = passwordValues[Number(passwordType)]
+        password = passwordValues[Number(passwordType)-1]
     }
 
-    let content;
-    let writer = new zip.ZipWriter(new zip.BlobWriter("application/zip"),
-        password = password,
-        useWebWorkers = true,
-
-    );
-
-    Array.from(document.getElementById("files-upload").files).forEach(file => {
-        //zip.file(file.name, file)
-
-        // add files
-
-        writer.add(
-            file.name,
-            new zip.BlobReader(file)
-        )
-    });
-
-    if (password!=undefined) {
-        /*zip.generateAsync({
-            type : "blob",
-            password : "lmao",
-            encryptStrength : 3
-        }).then((content) => {
-            saveAs(content, document.getElementById("patient-name").value+".zip")
-        })*/
-
-        URL.createObjectURL(await zipWriter.close()).then(
-            (content) => {
-                saveAs(content, document.getElementById("patient-name").value+".zip")
-            }
-        )
-    }
-    
-    
+    return password
 
 }
+
+(() => {
+
+	const model = (() => {
+
+		let zipWriter;
+		return {
+			addFile(file, options) {
+				if (!zipWriter) {
+					zipWriter = new zip.ZipWriter(new zip.BlobWriter("application/zip"));
+				}
+				return zipWriter.add(file.name, new zip.BlobReader(file), options);
+			},
+			async getBlobURL() {
+				if (zipWriter) {
+					const blobURL = URL.createObjectURL(await zipWriter.close());
+					zipWriter = null;
+					return blobURL;
+				} else {
+					throw new Error("Zip file closed");
+				}
+			}
+		};
+
+	})();
+
+    (() => {
+        
+        window.addEventListener("load", () => {
+            document.getElementById("save").addEventListener("click", onDownloadButtonClick);
+            document.getElementById("files-upload").addEventListener("change", (e) => {
+                console.log(e.target.files);
+                selectFiles();
+            });
+        });
+
+        async function selectFiles() {
+			try {
+				await addFiles();
+			} catch (error) {
+				alert(error);
+			}
+		}
+
+        async function addFiles() {
+            let filesArray = Array.from(document.getElementById("files-upload").files);
+            filesArray.forEach(file => {
+                model.addFile(
+                    file, {
+                        password : getPassword()
+                    }
+                )
+            });
+        }
+
+        async function onDownloadButtonClick(event) {
+
+            if (document.getElementById("patient-name").value=="") {
+                alert("Missing patient's name")
+                return;
+            }
+
+            let infoTextBlob = new Blob([`${document.getElementById("patient-name").value}\n____________________\n\n${document.getElementById("notes").value}`]);
+            await model.addFile(
+                new File([infoTextBlob], "info.txt", {type:infoTextBlob.type}),
+                {password : getPassword()}
+            );
+
+
+			let blobURL;
+			try {
+				blobURL = await model.getBlobURL();
+			} catch (error) {
+				alert(error);
+			}
+			if (blobURL) {
+				const anchor = document.createElement("a");
+				const clickEvent = new MouseEvent("click");
+				anchor.href = blobURL;
+				anchor.download = document.getElementById("patient-name").value+".zip";
+				anchor.dispatchEvent(clickEvent);
+                setTimeout(() => {
+                    location.reload();
+                }, 500);
+			}
+			event.preventDefault();
+		}
+
+    })();
+
+})();
