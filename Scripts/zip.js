@@ -171,6 +171,12 @@ function selectDefaultRadioButton() {
 function saveZIP() {
     let passwordType = document.querySelector('input[name="password-type"]:checked').value;
     let password;
+
+    if (document.getElementById("patient-name").value=="") {
+        alert("Missing patient's name")
+        return;
+    }
+
     if (passwordType == 'none') {
         password = null;
     } else if (passwordType == 'new') {
@@ -182,5 +188,23 @@ function saveZIP() {
         password = passwordValues[Number(passwordType)]
     }
 
+    let content;
+    let zip = new JSZip();
+
+    Array.from(document.getElementById("files-upload").files).forEach(file => {
+        zip.file(file.name, file)
+    });
+
+    if (password==null) {
+        zip.generateAsync({
+            type : "blob",
+            password : "lmao",
+            encryptStrength : 3
+        }).then((content) => {
+            saveAs(content, document.getElementById("patient-name").value+".zip")
+        })
+    }
+    
+    
 
 }
