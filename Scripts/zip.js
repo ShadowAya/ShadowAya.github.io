@@ -36,6 +36,11 @@ window.addEventListener("load", () => {
 
 });
 
+function clearUploadedFiles() {
+    document.getElementById("files-upload").value = null;
+    document.getElementById("files-upload").dispatchEvent(new Event("change"));
+}
+
 function animateThing(event) {
     let input = event.target;
     let inputTitle = input.parentElement.children[0];
@@ -215,7 +220,32 @@ function getPassword() {
             document.getElementById("files-upload").addEventListener("change", (e) => {
                 console.log(e.target.files);
                 selectFiles();
+
+                let uploadedContainer = document.getElementById("uploaded-container");
+                if (e.target.files.length == 0) {
+                    model.clearFiles();
+                    e.target.parentElement.style.display = "";
+                    uploadedContainer.style.display = "none";
+                    uploadedContainer.innerHTML = "<div></div>";
+                } else {
+                    e.target.parentElement.style.display = "none";
+                    uploadedContainer.style.display = "";
+                    let filenamesP = Array.from(e.target.files).map(file => file.name).join("<br>");
+                    uploadedContainer.children[0].insertAdjacentHTML(
+                        "beforeend",
+                        `
+                        <div class="file-upload-label"><p>Uploaded Files</p><p>${filenamesP}</p></div>
+                        `
+                    )
+                    uploadedContainer.children[0].insertAdjacentHTML(
+                        "beforeend",
+                        `
+                        <div onclick="clearUploadedFiles()" class="file-upload-label file-upload-label-smaller"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 50 50"><path fill="currentColor" d="M20 18h2v16h-2zm4 0h2v16h-2zm4 0h2v16h-2zm-16-6h26v2H12zm18 0h-2v-1c0-.6-.4-1-1-1h-4c-.6 0-1 .4-1 1v1h-2v-1c0-1.7 1.3-3 3-3h4c1.7 0 3 1.3 3 3v1z"/><path fill="currentColor" d="M31 40H19c-1.6 0-3-1.3-3.2-2.9l-1.8-24l2-.2l1.8 24c0 .6.6 1.1 1.2 1.1h12c.6 0 1.1-.5 1.2-1.1l1.8-24l2 .2l-1.8 24C34 38.7 32.6 40 31 40z"/></svg><p>Remove</p></div>
+                        `
+                    )
+                }
             });
+            
             Array.from(document.getElementsByName("password-type")).forEach(radio => {
                 radio.addEventListener("click", async () => {
                     await updatedPasswordForFiles();
@@ -228,7 +258,7 @@ function getPassword() {
                 model.clearFiles();
                 setTimeout(async () => {
                     await addFiles();
-                }, 100);
+                }, 200);
             } catch (error) {
                 alert(error);
             }

@@ -190,7 +190,8 @@ input:focus {
 }
 
 .upload-container > div {
-    height: 200px;
+    padding-top: 20px;
+    height: 180px;
     width: 100%;
     background-color: #2a2a2a;
     border-radius: 10px;
@@ -202,7 +203,7 @@ input:focus {
     padding-top: 30px;
 }
 .upload-container > div > svg {
-    padding-top: 50px;
+    padding-top: 30px;
     height: 40px; width: 40px;
 }
 
@@ -325,4 +326,48 @@ input:focus {
 #save:hover, #save:focus {
     color: black;
     box-shadow: inset 0 0 0 0 #151515
+}
+
+.file-upload-label {
+
+    overflow: scroll;
+    height: 100px;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 8px;
+    padding-top: 10px;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+}
+
+.file-upload-label-smaller {
+    padding-top: 0;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.file-upload-label-smaller > * {
+    flex:1;
+    flex-grow:0;
+}
+.file-upload-label-smaller > svg {
+    min-height: 25px; min-width: 25px;
+}
+.file-upload-label-smaller > p {
+    padding: 5px 0 0 5px;
+}
+
+.file-upload-label > p:first-of-type {
+    font-weight: 900;
+}
+.file-upload-label > p {
+    padding-bottom: 10px;
+}
+
+.file-upload-label::-webkit-scrollbar {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+    display: none;  /* Safari and Chrome */
 }
