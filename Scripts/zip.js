@@ -197,7 +197,7 @@ function getPassword() {
 				}
 				return zipWriter.add(file.name, new zip.BlobReader(file), options);
 			},
-            clearFiles() {
+            async clearFiles() {
                 return zipWriter = new zip.ZipWriter(new zip.BlobWriter("application/zip"));
             },
 			async getBlobURL() {
@@ -219,7 +219,7 @@ function getPassword() {
             document.getElementById("save").addEventListener("click", onDownloadButtonClick);
             document.getElementById("files-upload").addEventListener("change", (e) => {
                 console.log(e.target.files);
-                selectFiles();
+                //selectFiles();
 
                 let uploadedContainer = document.getElementById("uploaded-container");
                 if (e.target.files.length == 0) {
@@ -255,10 +255,8 @@ function getPassword() {
 
         async function updatedPasswordForFiles() {
             try {
-                model.clearFiles();
-                setTimeout(async () => {
-                    await addFiles();
-                }, 200);
+                await model.clearFiles();
+                await addFiles();
             } catch (error) {
                 alert(error);
             }
@@ -296,6 +294,7 @@ function getPassword() {
                 {password : getPassword()}
             );
 
+            await selectFiles();
 
 			let blobURL;
 			try {
