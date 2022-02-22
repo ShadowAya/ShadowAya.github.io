@@ -192,6 +192,9 @@ function getPassword() {
 				}
 				return zipWriter.add(file.name, new zip.BlobReader(file), options);
 			},
+            clearFiles() {
+                return zipWriter = new zip.ZipWriter(new zip.BlobWriter("application/zip"));
+            },
 			async getBlobURL() {
 				if (zipWriter) {
 					const blobURL = URL.createObjectURL(await zipWriter.close());
@@ -213,7 +216,23 @@ function getPassword() {
                 console.log(e.target.files);
                 selectFiles();
             });
+            Array.from(document.getElementsByName("password-type")).forEach(radio => {
+                radio.addEventListener("click", async () => {
+                    await updatedPasswordForFiles();
+                })
+            });
         });
+
+        async function updatedPasswordForFiles() {
+            try {
+                model.clearFiles();
+                setTimeout(async () => {
+                    await addFiles();
+                }, 100);
+            } catch (error) {
+                alert(error);
+            }
+        }
 
         async function selectFiles() {
 			try {
