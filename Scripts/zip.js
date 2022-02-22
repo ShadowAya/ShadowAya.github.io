@@ -30,6 +30,7 @@ window.addEventListener("load", () => {
         element.children[1].addEventListener("drop", (e) => {
             e.preventDefault();
             document.getElementById("files-upload").files = e.dataTransfer.files;
+            document.getElementById("files-upload").dispatchEvent(new Event("change"));
         })
     });
 
