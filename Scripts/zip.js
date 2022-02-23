@@ -191,11 +191,11 @@ function getPassword() {
 
 		let zipWriter;
 		return {
-			addFile(file, options) {
+			async addFile(file, options) {
 				if (!zipWriter) {
 					zipWriter = new zip.ZipWriter(new zip.BlobWriter("application/zip"));
 				}
-				return zipWriter.add(file.name, new zip.BlobReader(file), options);
+				return await zipWriter.add(file.name, new zip.BlobReader(file), options);
 			},
             async clearFiles() {
                 return zipWriter = new zip.ZipWriter(new zip.BlobWriter("application/zip"));
@@ -219,7 +219,7 @@ function getPassword() {
             document.getElementById("save").addEventListener("click", onDownloadButtonClick);
             document.getElementById("files-upload").addEventListener("change", (e) => {
                 console.log(e.target.files);
-                //selectFiles();
+                selectFiles();
 
                 let uploadedContainer = document.getElementById("uploaded-container");
                 if (e.target.files.length == 0) {
@@ -272,8 +272,8 @@ function getPassword() {
 
         async function addFiles() {
             let filesArray = Array.from(document.getElementById("files-upload").files);
-            filesArray.forEach(file => {
-                model.addFile(
+            filesArray.forEach(async file => {
+                await model.addFile(
                     file, {
                         password : getPassword()
                     }
@@ -294,25 +294,26 @@ function getPassword() {
                 {password : getPassword()}
             );
 
-            await selectFiles();
 
-			let blobURL;
-			try {
-				blobURL = await model.getBlobURL();
-			} catch (error) {
-				alert(error);
-			}
-			if (blobURL) {
-				const anchor = document.createElement("a");
-				const clickEvent = new MouseEvent("click");
-				anchor.href = blobURL;
-				anchor.download = document.getElementById("patient-name").value+".zip";
-				anchor.dispatchEvent(clickEvent);
+            let blobURL;
+            try {
+                blobURL = await model.getBlobURL();
+            } catch (error) {
+                alert(error);
+            }
+                
+
+            if (blobURL) {
+                const anchor = document.createElement("a");
+                const clickEvent = new MouseEvent("click");
+                anchor.href = blobURL;
+                anchor.download = document.getElementById("patient-name").value+".zip";
+                anchor.dispatchEvent(clickEvent);
                 setTimeout(() => {
                     location.reload();
                 }, 500);
-			}
-			event.preventDefault();
+            }
+            event.preventDefault();
 		}
 
     })();
