@@ -23,7 +23,7 @@ window.addEventListener("load", () => {
         input.addEventListener("input", animateThing)
     });
 
-    Array.from(document.getElementsByClassName("upload-container")).forEach(element => {
+    Array.from(document.getElementsByClassName("upload-container-functional")).forEach(element => {
         element.children[1].addEventListener("dragover", (e) => {
             e.preventDefault();
         })
