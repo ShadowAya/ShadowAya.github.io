@@ -323,7 +323,7 @@ input:focus {
     flex-grow: 0;
 }
 
-#save:hover, #save:focus {
+#save:hover {
     color: black;
     box-shadow: inset 0 0 0 0 #151515
 }
