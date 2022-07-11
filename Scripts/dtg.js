@@ -66,6 +66,9 @@ function buttonTimeActions(buttonTitle) {
     let timeSelected = document.getElementById('timepicker').value.split(":");
     timeSelected[0] = Number(timeSelected[0]);
     timeSelected[1] = Number(timeSelected[1]);
+    if (timeSelected.length==3) {
+        timeSelected[2] = Number(timeSelected[2]);
+    }
 
     switch (buttonTitle) {
         case "round" :
@@ -83,6 +86,7 @@ function buttonTimeActions(buttonTitle) {
         case "now" :
             timeSelected[0] = new Date().getHours();
             timeSelected[1] = new Date().getMinutes();
+            timeSelected[2] = new Date().getSeconds();
             date = new Date();
             date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12);
             document.getElementById('datepicker').valueAsDate = date;
@@ -108,6 +112,9 @@ function buttonTimeActions(buttonTitle) {
     }
 
     document.getElementById('timepicker').value = `${(timeSelected[0] < 10) ? "0" : ""}${timeSelected[0]}:${(timeSelected[1] < 10) ? "0" : ""}${timeSelected[1]}`;
+    if (timeSelected.length==3) {
+        document.getElementById('timepicker').value += `:${(timeSelected[2] < 10) ? "0" : ""}${timeSelected[2]}`
+    }
     pickedNew();
 }
 
