@@ -24,9 +24,10 @@
     color: white;
 }
 #datepicker, #timepicker {
+    margin-right: 9px;
     background-color: white;
     color: black;
-    width: 195px;
+    width: 186px;
 }
 /*#submitbutton {
     padding: 0 17px;
@@ -34,27 +35,40 @@
     color: black;
 }*/
 
-.button {
-    padding: 0 5px;
+button {
+    padding: 5px 8px;
     background-color: white;
     color: black;
+    border: none;
+    border-radius: 2px;
+}
+input {
+    border: none;
+    border-radius: 2px;
+    padding: 5px 2px 4px 6px;
 }
 
 #content {
-    margin-top: 20vh;
     display: flex;
     flex-flow: column;
     align-items: center;
     justify-content: center;
+    width: 300px;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%,0);
+    min-width: 300px;
 }
 .contentrow {
+    flex-grow: 1;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: auto;
     
     margin-bottom: 5px;
     width:300px;
+    
 }
 .bottommargin {
     margin-bottom: 13px;
@@ -65,9 +79,20 @@
 .contentrow > * {
     margin: 0 5px;
 }
+.contentrow > button {
+    margin: 0 3px;
+}
+.contentrow > button:first-of-type {
+    margin-left: 5px;
+}
 .contentrow > p {
     user-select: none;
     cursor: default;
+}
+
+.fromleft {
+    justify-content: flex-start;
+    margin-left: 120px;
 }
 
 #preview-format {
@@ -100,11 +125,112 @@
 
 #dialog {
     position: absolute;
-    bottom: 0;
-    right: 1;
+    bottom: 50px;
+    right: 50%;
+    transform: translate(50%,0);
     color: black;
     background-color: white;
     padding: 10px;
-    margin-bottom: 50px;
     border-radius: 10px;
 }
+
+/*////////*/
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    font-size: 13px;
+}
+
+.dropdown-field {
+    border-radius: 2px;
+    background-color: white;
+    color: black;
+    padding: 2px 8px;
+    font-size: 16px;
+    border: none;
+    min-width: 100px;
+    width:194px;
+    height: 29px;
+
+    display: flex;
+    align-items: center;    
+}
+
+.dropdown-field > span {
+    font-size: 13px;
+    color:black;
+}
+.dropdown-field > span:nth-of-type(1) {
+    margin-bottom: 1px;
+    margin-right: 5px;
+    background-color: #00000000;
+}
+.dropdown-field > span:nth-of-type(2) {
+    background-color: rgb(203, 203, 203);
+    padding: 2px 4px;
+    font-size: 12px;
+    border-radius: 2px;
+}
+.dropdown-field > span:nth-of-type(3) {
+    background-color: #00000000;
+    flex-grow: 1;
+    text-align: right;
+    margin-right: 2px;
+}
+
+.dropdown-content {
+    z-index: 998;
+    transform-origin: 50% bottom;
+    display: none;
+    flex-direction: column-reverse;
+    position: absolute;
+
+    background-color: #00000000;
+    bottom: 26px;
+    padding-bottom: 5px;
+}
+.dropdown-content-static {
+    display: flex;
+}
+
+.dropdown-content :last-child {
+    border-radius: 2px 2px 0 0;
+}
+.dropdown-content :first-child {
+    border-radius: 0 0 2px 2px;
+}
+
+.dropdown-content > * {
+    padding: 2px 5px;
+    flex-grow: 1;
+    background-color: white;
+    color: black;
+    min-width: 80px;
+}
+
+.dropdown-content > *:hover {
+    transition: 0.2s;
+    background-color: rgb(203, 203, 203);
+    user-select: none;
+    cursor: pointer;
+}
+
+@keyframes dropdown-appear {
+    0% {
+        transform: scaleY(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+.dropdown:hover .dropdown-content-animate {
+    display: flex;
+    animation-name: dropdown-appear;
+    animation-duration: 0.3s;
+}
+
+/*////////*/

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>shadow_aya • DTG</title>
+    <meta name="darkreader" content="NO-DARKREADER-PLUGIN" />
+    <script src="../nodarkreader.min.js"></script>
 
     <meta content="Discord Timestamp Generator" property="og:title" />
     <meta content="Generate Discord timestamps that update in real time in chat (bet you didn't know that was a thing since 1625871600 😏)" property="og:description" />
@@ -20,18 +22,43 @@
 <body>
     <!--<p id="signature">by shadow_aya</p>-->
     <div id="content">
-        <div class="contentrow bottommargin">
-            <p>date:</p><input type="date" id="datepicker" onchange="pickedNew();"><i class="far fa-copy" style="padding: 4px;cursor:pointer;" onclick="copyD();"></i>
+        <div class="contentrow">
+            <p>date:</p>
+            <input type="date" id="datepicker" onchange="pickedNew();">
+            <i class="far fa-copy" style="padding: 4px;cursor:pointer;" onclick="copyD();"></i>
+        </div>
+        <div class="contentrow bottommargin fromleft">
+            <div class="dropdown" name="date-format">
+                <button class="dropdown-field" onclick="toggleDropdownContent(this)"><span>style</span><span>Short Date</span><span>⋮</span></button>
+                <div class="dropdown-content dropdown-content-animate">
+                    <p onclick="sendData(this)">Short Date</p>
+                    <p onclick="sendData(this)">Long Date</p>
+                    <p onclick="sendData(this)">Short Date/Time</p>
+                    <p onclick="sendData(this)">Long Date/Time</p>
+                </div>
+            </div>
         </div>
         <div class="contentrow">
-            <p>time:</p><input type="time" id="timepicker" onchange="pickedNew();"><i class="far fa-copy" style="padding: 4px;cursor:pointer;" onclick="copyt();"></i>
+            <p>time:</p>
+            <input type="time" step=0 id="timepicker" onchange="pickedNew();">
+            <i class="far fa-copy" style="padding: 4px;cursor:pointer;" onclick="copyt();"></i>
         </div>
-        <div class="contentrow bottommargin">
-            <button type="button" class="button" onclick="buttonTimeActions(this.innerHTML);">round</button>
-            <button type="button" class="button" onclick="buttonTimeActions(this.innerHTML);">now</button>
-            <button type="button" class="button" onclick="buttonTimeActions(this.innerHTML);">+1h</button>
-            <button type="button" class="button" onclick="buttonTimeActions(this.innerHTML);" style="margin-right: 37px;">-1h</button>
+        <div class="contentrow fromleft">
+            <button type="button" onclick="buttonTimeActions(this.innerHTML);">round</button>
+            <button type="button" onclick="buttonTimeActions(this.innerHTML);">now</button>
+            <button type="button" onclick="buttonTimeActions(this.innerHTML);">+1h</button>
+            <button type="button" onclick="buttonTimeActions(this.innerHTML);">-1h</button>
         </div>
+        <div class="contentrow bottommargin fromleft">
+            <div class="dropdown" name="time-format">
+                <button class="dropdown-field" onclick="toggleDropdownContent(this)"><span>style</span><span>Short Time</span><span>⋮</span></button>
+                <div class="dropdown-content dropdown-content-animate">
+                    <p onclick="sendData(this);changeTimePicker('short')">Short Time</p>
+                    <p onclick="sendData(this);changeTimePicker('long')">Long Time</p>
+                </div>
+            </div>
+        </div>
+
 
         <!--<div class="contentrow">
             <input type="submit" id="submitbutton">
@@ -46,10 +73,8 @@
         <div class="contentrow centered">
             <p id="preview-format">&lt;t:0000000000:R></p> <i class="far fa-copy" style="padding: 4px;cursor:pointer;" onclick="copyR();"></i>
         </div>
-        <div class='contentrow centered' style="margin: 50px 0;">
-            <p id='dialog' style="opacity: 0;">###</p>
-        </div>
     </div>
+    <p id='dialog' style="opacity: 0;">###</p>
 
 </body>
 </html>

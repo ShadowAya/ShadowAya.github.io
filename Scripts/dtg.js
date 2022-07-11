@@ -1,15 +1,21 @@
-var timestamp, timestampString;
+var timestamp, timestampString, storedSeconds, myValues;
+
+storedSeconds = "00";
+myValues = {
+    "date-format" : "Short Date",
+    "time-format" : "Short Time"
+};
 
 setTimeout(
-    function() {
+    () => {
         pickedNew();
         setInterval(function() {pickedNew();}, 60000);
     }, (60 - new Date().getSeconds()) * 1000 + 500
 );
 
 window.onload = function() {
-    date = new Date();
-    date2 = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12)
+    let date = new Date();
+    let date2 = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12)
     console.log(date);
     document.getElementById('datepicker').valueAsDate = date2;
     document.getElementById('timepicker').value = ((date.getHours() < 10) ? "0" : "") + date.getHours() + ":" + ((date.getMinutes() < 10) ? "0" : "") + date.getMinutes()
@@ -22,19 +28,27 @@ function copyR() {
 }
 
 function copyt() {
-    var timeSelected = document.getElementById('timepicker').value.split(":");
-    timeSelected[0] = Number(timeSelected[0]);
-    timeSelected[1] = Number(timeSelected[1]);
-
     navigator.clipboard.writeText(
-        "<t:" + (1577833200 + timeSelected[0]*3600 + timeSelected[1]*60).toString() + ":t>"
+        `<t:${timestamp}:${
+            {
+                "Short Time" : "t",
+                "Long Time" : "T",
+            }[myValues["time-format"]]
+        }>`
     );
     summonDialog('copied time!');
 }
 
 function copyD() {
     navigator.clipboard.writeText(
-        "<t:" + (document.getElementById('datepicker').valueAsDate.getTime() / 1000).toString() + ":D>"
+        `<t:${timestamp}:${
+            {
+                "Short Date" : "d",
+                "Long Date" : "D",
+                "Short Date/Time" : "f",
+                "Long Date/Time" : "F"
+            }[myValues["date-format"]]
+        }>`
     );
     summonDialog('copied date!');
 }
@@ -49,7 +63,7 @@ function summonDialog(text) {
 }
 
 function buttonTimeActions(buttonTitle) {
-    var timeSelected = document.getElementById('timepicker').value.split(":");
+    let timeSelected = document.getElementById('timepicker').value.split(":");
     timeSelected[0] = Number(timeSelected[0]);
     timeSelected[1] = Number(timeSelected[1]);
 
@@ -103,6 +117,9 @@ function pickedNew() {
 
     timestamp = Math.floor(new Date(date.replace("-",".")).getTime() / 1000);
     timestamp += Number(time[0]) * 3600 + Number(time[1]) * 60;
+    if (time.length==3) {
+        timestamp += Number(time[2]);
+    }
     
     document.getElementById("preview-format").innerHTML = `&lt;t:${timestamp}:R>`;
     timestampString = `<t:${timestamp}:R>`
@@ -135,4 +152,74 @@ function pickedNew() {
     }
 
     document.getElementById("preview-text").innerHTML = stringPreview;
+}
+
+/*//////*/
+
+function sendData(e) {
+    let value = e.innerHTML;
+
+    let dropdownEl = e.parentElement.parentElement;
+    let dropdownField = dropdownEl.getElementsByTagName('button')[0];
+    let dataField = dropdownEl.getAttribute("name");
+
+    myValues[dataField] = value;
+    dropdownField.innerHTML = `${
+        dropdownField.innerHTML.match(/^<span>(.*?)<\/span>/)[0]
+    }<span>${value}</span><span>⋮</span>`;
+}
+
+function toggleDropdownContentAnimationHandler(e) {
+    let dropdownField = e;
+    let dropdownContent = e.parentElement.getElementsByTagName('div')[0];
+
+    dropdownField.insertAdjacentHTML(
+        "afterend",
+        `<button class="dropdown-field" onclick="toggleDropdownContent(this)">${dropdownField.innerHTML}</button>`
+    )
+    dropdownField.remove()
+    dropdownContent.classList.add("dropdown-content-animate");
+}
+
+function toggleDropdownContent(e) {
+    let dropdownContent = e.parentElement.getElementsByTagName('div')[0];
+    let dropdownField = e.parentElement.getElementsByTagName('button')[0];
+
+    if (dropdownContent.classList.contains("dropdown-content-static")) {
+        
+        if (!window.matchMedia("(pointer: coarse)").matches) {
+
+            dropdownField.setAttribute("onmouseleave", "toggleDropdownContentAnimationHandler(this)")
+            dropdownField.insertAdjacentHTML(
+                "afterend",
+                `<button class="dropdown-field" onmouseleave="toggleDropdownContentAnimationHandler(this)" onclick="toggleDropdownContent(this)">${dropdownField.innerHTML}</button>`
+            )
+            dropdownField.remove()
+        }
+        dropdownContent.classList.remove("dropdown-content-static");
+        
+    } else {
+        dropdownContent.classList.add("dropdown-content-static");
+        dropdownContent.classList.remove("dropdown-content-animate");
+    }
+
+}
+
+/*/////*/
+
+function changeTimePicker(type) {
+    let timeSelected = document.getElementById('timepicker').value.split(":");
+
+    if (type=="short") {
+        document.getElementById("timepicker").value = `${timeSelected[0]}:${timeSelected[1]}:00`;
+        if (timeSelected.length==3) {
+            storedSeconds = timeSelected[2];
+        }
+        document.getElementById("timepicker").setAttribute("step", 0);
+    } else {
+        document.getElementById("timepicker").setAttribute("step", 1);
+        document.getElementById("timepicker").value = `${timeSelected[0]}:${timeSelected[1]}:${storedSeconds}`;
+    }
+    
+    pickedNew();
 }
