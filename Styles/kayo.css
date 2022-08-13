@@ -1,0 +1,32 @@
+body {
+    background-image: url(../Media/bg1.png);
+    background-position: cover;
+}
+  
+.val-switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.val-switch img {
+    transition: .4s ease-in;
+    position: absolute;
+}
+
+.val-switch img:nth-of-type(1) {
+    height: 20px; width: auto;
+    top:7px;left:9px;
+    filter: grayscale();
+    
+}
+.val-switch img:nth-of-type(2) {
+    height: 34px; width: 34px;
+    top:0;left:0;
+}
+
+.val-switch>input:checked + img {
+    filter: none;
+}
+.val-switch>input:checked + img + img {
+    left:42px;
+}
