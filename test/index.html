@@ -1,10 +1,17 @@
 <!doctype html>
 <html lang="en">
 <head prefix="og: http://ogp.me/ns# video: http://ogp.me/ns/video#">
+    <script>
+
+        const params = new URLSearchParams(document.location.search);
+        const text = params.get("text");
+
+        document.head.insertAdjacentHTML("afterbegin",`<meta property="og:title" content="${text}">`)
+
+    </script>
+
 <meta charset="utf-8">
-<title>Arrival of a Train at La Ciotat</title>
-<meta property="og:title" content="Sankakucomplex Video">
-<meta property="og:description" content="Sankakucomplex Video">
+<title>lol</title>
 <meta property="og:type" content="video.movie">
 <link rel="canonical" href="https://chan.sankakucomplex.com/post/show/31184813">
 <meta property="og:url" content="https://chan.sankakucomplex.com/post/show/31184813">
