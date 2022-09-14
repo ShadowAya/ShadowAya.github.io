@@ -122,7 +122,7 @@ function pickedNew() {
     let date = document.getElementById("datepicker").value;
     let time = document.getElementById("timepicker").value.split(":");
 
-    timestamp = Math.floor(new Date(date.replace("-",".")).getTime() / 1000);
+    timestamp = Math.floor(new Date(date).getTime() / 1000);
     timestamp += Number(time[0]) * 3600 + Number(time[1]) * 60;
     if (time.length==3) {
         timestamp += Number(time[2]);
