@@ -86,7 +86,9 @@ function buttonTimeActions(buttonTitle) {
         case "now" :
             timeSelected[0] = new Date().getHours();
             timeSelected[1] = new Date().getMinutes();
-            timeSelected[2] = new Date().getSeconds();
+            if (timeSelected.length==3) {
+                timeSelected[2] = new Date().getSeconds();
+            }
             date = new Date();
             date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12);
             document.getElementById('datepicker').valueAsDate = date;
@@ -120,18 +122,18 @@ function buttonTimeActions(buttonTitle) {
 
 function pickedNew() {
     let date = document.getElementById("datepicker").value;
-    let time = document.getElementById("timepicker").value.split(":");
+    let time = document.getElementById("timepicker").value;
 
-    timestamp = Math.floor(new Date(date).getTime() / 1000);
-    timestamp += Number(time[0]) * 3600 + Number(time[1]) * 60;
+    timestamp = Math.floor(Date.parse(`${date}T${time}`) / 1000);
+    /*timestamp += Number(time[0]) * 3600 + Number(time[1]) * 60;
     if (time.length==3) {
         timestamp += Number(time[2]);
-    }
+    }*/
     
     document.getElementById("preview-format").innerHTML = `&lt;t:${timestamp}:R>`;
     timestampString = `<t:${timestamp}:R>`
 
-    let now = Math.floor(new Date().setSeconds(0)/1000);
+    let now = Math.floor(new Date()/1000);
 
     //console.log(now - timestamp);
     let timeValue = now - timestamp;
@@ -218,7 +220,7 @@ function changeTimePicker(type) {
     let timeSelected = document.getElementById('timepicker').value.split(":");
 
     if (type=="short") {
-        document.getElementById("timepicker").value = `${timeSelected[0]}:${timeSelected[1]}:00`;
+        document.getElementById("timepicker").value = `${timeSelected[0]}:${timeSelected[1]}`;
         if (timeSelected.length==3) {
             storedSeconds = timeSelected[2];
         }
