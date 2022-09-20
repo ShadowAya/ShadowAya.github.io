@@ -10,16 +10,6 @@ window.addEventListener('load', function(){
     folderElements = [
         document.getElementById('folder'), document.getElementById('folder-bg')
     ];
-
-    console.log(document.documentElement.clientWidth);
-    alert(document.documentElement.clientWidth);
-
-    /*if (window.innerWidth < 800) {
-        $(".content-box").css({
-            "font-size" : "40px"
-        });
-    }*/
-
     setInterval(() => {
         quickAnimations()
     }, 50);

@@ -115,3 +115,16 @@
 .content-box:last-of-type {
     margin-bottom: 200px;
 }
+
+@media (max-width: 900px) {
+    #folder {
+        width: 95vw;
+    }
+    #folder-bg {
+        width: 95vw;
+    }
+    .content-box {
+        width: 80vw;
+        max-width: 80vw;
+    }
+  }
