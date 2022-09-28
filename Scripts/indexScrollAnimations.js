@@ -1,10 +1,13 @@
 var folderOpened = false;
 let folderElements;
 
-window.onbeforeunload = function () {
+/*window.onbeforeunload = function () {
+    $("#getfucked").css({
+        "background-color" : "#000000"
+    })
     window.scrollTo(0, 0);
     return;
-}
+}*/
 
 window.addEventListener('load', function(){
     folderElements = [
