@@ -28,6 +28,11 @@ li {
 .ico-link iconify-icon {
     display: none;
 }
+@media (hover:none) {
+    .ico-link iconify-icon {
+        display: inline-block;
+    }
+}
 
 .ico-link:hover iconify-icon {
     display: inline-block;
@@ -50,6 +55,11 @@ li {
     opacity: 0.6;
     display: none;
 }
+@media (hover:none) {
+    .link-anchor iconify-icon {
+        display: inline-block;
+    }
+}
 .link-anchor:hover iconify-icon {
     display: inline-block;
 }
@@ -66,3 +76,97 @@ li {
     display: flex;
     flex-wrap: wrap;
 }
+
+.smaller-stack img {
+    width: 380px;
+}
+
+.codeblock {
+    opacity: 1;
+    width: 100%;
+    max-width: 1000px;
+    padding: 15px;
+    margin: 10px 0 10px 0;
+    border-radius: 10px;
+    background-color: black;
+}
+.codeblock > span {
+    opacity: 0.4;
+}
+
+.codeblock-inline {
+    opacity: 1;
+    padding: 2px 7px 2px 7px;
+    border-radius: 2px;
+    background-color: black;
+}
+
+.download-field {
+    width: 480px;
+    max-width: calc(70vw - 20px);
+}
+
+.download-field > div {
+    color: white;
+
+    width: 480px;
+    max-width: calc(70vw - 20px);
+
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 10px 0 10px 0;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap:15px;
+
+    
+}
+.download-field > div:hover {
+    background-color: white;
+    color: black;
+    transition: 0.2s;
+}
+
+/********************************************/
+
+.input-div {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.input-div > h3 {
+    padding: 0;
+    z-index: 2;
+    user-select: none;
+    font-weight: 400;
+    position:absolute;
+    margin: 20px 0 0 10px;
+    transition: 0.15s;
+}
+
+.input-div > input {
+    outline: none;
+    position: relative;
+    z-index: 20;
+    /*resize: none;*/
+
+    margin: 25px 0 5px 0;
+    border-radius: 10px;
+    padding: 10px;
+    border-width: 0;
+    color: black;
+    font-size: 20px;
+
+    background: rgb(255,255,255);
+
+    width: 500px;
+    max-width: 70vw;
+    height: 30px;
+}
+
+.input-div > textarea:focus {
+    outline: none;
+}
+
+/********************************************/

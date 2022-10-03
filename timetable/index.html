@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../Styles/timetable.css">
 
     <script src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
-    <script src="../Scripts/lists.js"></script>
+    <script src="../Scripts/lists.js" defer></script>
 
     <title>Timetable</title>
 </head>
@@ -21,8 +21,9 @@
     <h1 id="top" class="anchor">Dynamic Timetable <span class="light-text">version 1.0</span></h1>
     <p>A timetable inside a notification. Fetches data daily and updates automatically. Detects off-days.
         <br>Built-in buttons for easy access to commute etc. Currently works with <span class="highlight-text">EduPage</span> only!</p>
-        <br><br>Some technical skill is needed to set-up, but following the installation is straight-forward.<br><br>
-
+        <br>Some technical skill is needed for the set-up, but following the installation guide is straight-forward.<br><br>
+        <p><span class="highlight-text">If you find any issues, message me on Discord at <span class="codeblock-inline">shadow_aya#0001</span>. You will be credited and I will be thankful xd.</p>
+        <br>
 
     <div class="image-stack">
         <div><img src="../Media/timetable/full.png"></div>
@@ -51,8 +52,8 @@
         <li><a class="ico-link" target="_blank" href="https://taskernet.com/shares/?user=AS35m8moivly9ZYQpF7F%2Bvk7Eyp%2BbY%2FMXhrWOSZ9IrWEStU%2BUH7WcULaerueqcugxcU%3D&id=Project%3ADynamic+Timetable">
             Tasker Profile <iconify-icon icon="akar-icons:link-out" width="15"></iconify-icon></a></li>
 
-        <li><a class="ico-link" href="#scripts">
-            Python Script <iconify-icon icon="akar-icons:link-chain" width="15"></iconify-icon></a></li>
+        <li><a class="ico-link" href="#downloads">
+            Python & Shell Scripts <iconify-icon icon="akar-icons:link-chain" width="15"></iconify-icon></a></li>
 
         <li><a class="ico-link" href="#login-json">
             Login JSON <iconify-icon icon="akar-icons:link-chain" width="15"></iconify-icon></a></li>
@@ -66,8 +67,98 @@
         </ul></li>
     </ul>
 
-    <br><br><br><p>unfinished</p>
-    <p>ripbozo</p>
+    <a class="link-anchor" href="#downloads"><h2 id="downloads">Downloads
+        <iconify-icon icon="akar-icons:link-chain" width="20"></iconify-icon></h2></a>
+    
+        <a class="download-field" href="../Media/timetable/downloads/edu-today.py" download="edu-today.py">
+            <div>
+                <iconify-icon icon="charm:download" width="25"></iconify-icon> edu-today.py
+            </div>
+        </a>
+
+        <a class="download-field" href="../Media/timetable/downloads/edu-tmr.py" download="edu-tmr.py">
+            <div>
+                <iconify-icon icon="charm:download" width="25"></iconify-icon> edu-tmr.py
+            </div>
+        </a>
+
+        <a class="download-field" href="../Media/timetable/downloads/edu-today-script.sh" download="edu-today-script.sh">
+            <div>
+                <iconify-icon icon="charm:download" width="25"></iconify-icon> edu-today-script.sh
+            </div>
+        </a>
+
+        <a  class="download-field" href="../Media/timetable/downloads/edu-tmr-script.sh" download="edu-tmr-script.sh">
+            <div>
+                <iconify-icon icon="charm:download" width="25"></iconify-icon> edu-tmr-script.sh
+            </div>
+        </a>
+
+        <h3 id="login-json">Generate Login JSON</h3>
+        <p>The website doesn't process this input in any way except throwing it into the download.</p>
+        <div class="input-div">
+            <input placeholder="Username" id="json-username">
+        </div>
+        <div class="input-div textarea-password">
+            <input type="password" placeholder="Password" id="json-password">
+        </div>
+        <div class="input-div">
+            <input placeholder="EduPage subdomain" id="json-subdomain">
+        </div>
+        <p style="padding-bottom:20px;">Example: <span class="highlight-text">sspbrno</span> as in https://<span class="highlight-text">sspbrno</span>.edupage.org</p>
+
+        <a class="download-field"><div onclick="downloadLoginJSON();">
+            <iconify-icon icon="charm:download" width="25"></iconify-icon> Login JSON
+        </div></a>
+
+    <a class="link-anchor" href="#installation"><h2 id="installation">Installation
+        <iconify-icon icon="akar-icons:link-chain" width="20"></iconify-icon></h2></a>
+
+    <h4>Termux</h4>
+
+    <p>Install and run Termux. Inside it, install Python and the required library with this command.</p>
+    <p class="codeblock">
+        <span>$</span> pkg install python3
+        <br><span>$</span> pip3 install edupage-api
+    </p>
+
+    <p>If you're having issues, first try to run the repo command and choose a working repository, then update and continue with Python's installation.</p>
+    <p class="codeblock">
+        <span>$</span> termux-change-repo
+        <br><span>$</span> pkg update
+    </p>
+
+    <br><p>
+        Open your file explorer and locate the Termux directory.<br>
+        <h4>For older devices</h4>
+        Open the <span class="codeblock-inline">data/data/com.termux</span> directory.
+    </p>
+    <div class="image-stack smaller-stack">
+        <div><img src="../Media/timetable/tc/older1.png"></div>
+        <div><img src="../Media/timetable/tc/older2.png"></div>
+    </div>
+    <p>
+        <h4>For newer devices</h4>
+        Grant your file explorer access to the Termux directory and open it.
+    </p>
+    <div class="image-stack smaller-stack">
+        <div><img src="../Media/timetable/tc/newer1.png"></div>
+        <div><img src="../Media/timetable/tc/newer2.png"></div>
+    </div>
+
+    <br><p>
+        After opening the directory, place the Python (.py) scripts and your login (.json) directly in root
+        <br>Then, create a <span class="codeblock-inline">.termux/tasker</span> subfolder(s). Place the shell (.sh) scripts inside this folder
+    </p>
+
+    <h4>Tasker</h4>
+    <p>Open the app and do whatever it asks on setup (idk lol). Then, go to the Tasker Profile link and import the project from Taskernet.</p>
+    <br><p>
+        Go to Tasker App info > Permissions > Additional permissions > Run commands in Termux environment and Allow it
+    </p>
+
+    <h4>AutoNotification</h4>
+    <p>Doesn't really need anything except for permissions, just launch it and make sure it works.</p>
     
 </body>
 </html>

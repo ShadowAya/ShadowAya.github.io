@@ -1,0 +1,1 @@
+python3 edu-today.py
