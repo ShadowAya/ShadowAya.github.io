@@ -47,16 +47,17 @@ data = [MON, TUE, WED, THU, FRI, SAT, SUN][day]
 if len(data) == 0 :
     no_school = "No School"
     data = {}
-elif type(data) == "list" :
+elif type(data) is str :
+    no_school = data
+    data = {}
+
+else  :
+
     no_school = "false"
     newdata = {}
     for i in range(len(data)) :
         newdata[f'{i}'] = data[i]
     data = newdata
-
-else  :
-    no_school = data
-    data = {}
 
 
 print({
