@@ -18,11 +18,14 @@
 </head>
 <body>
 
-    <h1 id="top" class="anchor">Dynamic Timetable <span class="light-text">version 1.0</span></h1>
+    <h1 id="top" class="anchor">Dynamic Timetable <span class="light-text">version 1.1</span></h1>
     <p>A timetable inside a notification. Fetches data daily and updates automatically. Detects off-days.
         <br>Built-in buttons for easy access to commute etc. Currently works with <span class="highlight-text">EduPage</span> only!</p>
-        <br>Some technical skill is needed for the set-up, but following the installation guide is straight-forward.<br><br>
-        <p><span class="highlight-text">If you find any issues, message me on Discord at <span class="codeblock-inline">shadow_aya#0001</span>. You will be credited and I will be thankful xd.</p>
+        <br>Some technical skill is needed for the set-up, but following the installation guide is straight-forward.
+        <p>Developers, if you want to implement your own school's timetable,<a class="ico-link" href="#devs">
+            go to For Developers here <iconify-icon icon="akar-icons:link-chain" width="15"></iconify-icon></a></p>
+        <br>
+        <p><span class="highlight-text">If you find any bugs or have issues, message me on Discord at <span class="codeblock-inline">shadow_aya#0001</span>. You'll be credited if you help me with bugs.</p>
         <br>
 
     <div class="image-stack">
@@ -65,37 +68,35 @@
         <li><ul> V1.0
             <li>Initial release</li>
         </ul></li>
+        <li><ul> V1.1 (25/12/2022)
+            <li>Reworked Scripts</li>
+            <li>Default (EduPage) Script<ul>
+                <li>Fixed empty classroom string</li>
+                <li>Improved off-day detection</li>
+            </ul></li>
+            <li>Added "For Developers" section</li>
+            <li>Updated Termux requirements</li>
+        </ul></li>
     </ul>
 
     <a class="link-anchor" href="#downloads"><h2 id="downloads">Downloads
         <iconify-icon icon="akar-icons:link-chain" width="20"></iconify-icon></h2></a>
     
-        <a class="download-field" href="../Media/timetable/downloads/edu-today.py" download="edu-today.py">
+        <a class="download-field" href="../Media/timetable/downloads/timetable-script.py" download="edu-today.py">
             <div>
-                <iconify-icon icon="charm:download" width="25"></iconify-icon> edu-today.py
+                <iconify-icon icon="charm:download" width="25"></iconify-icon> timetable-script.py
             </div>
         </a>
 
-        <a class="download-field" href="../Media/timetable/downloads/edu-tmr.py" download="edu-tmr.py">
+        <a class="download-field" href="../Media/timetable/downloads/timetable-script.sh" download="edu-today-script.sh">
             <div>
-                <iconify-icon icon="charm:download" width="25"></iconify-icon> edu-tmr.py
-            </div>
-        </a>
-
-        <a class="download-field" href="../Media/timetable/downloads/edu-today-script.sh" download="edu-today-script.sh">
-            <div>
-                <iconify-icon icon="charm:download" width="25"></iconify-icon> edu-today-script.sh
-            </div>
-        </a>
-
-        <a  class="download-field" href="../Media/timetable/downloads/edu-tmr-script.sh" download="edu-tmr-script.sh">
-            <div>
-                <iconify-icon icon="charm:download" width="25"></iconify-icon> edu-tmr-script.sh
+                <iconify-icon icon="charm:download" width="25"></iconify-icon> timetable-script.sh
             </div>
         </a>
 
         <h3 id="login-json">Generate Login JSON</h3>
-        <p>The website doesn't process this input in any way except throwing it into the download.</p>
+        <p>The website doesn't process this input in any way except throwing it into the download.<br>
+        This JSON is made to work with the default scripts, for any other script follow their instructions.</p>
         <br>
         <div class="input-div">
             <input placeholder="Username" id="json-username">
@@ -121,6 +122,7 @@
     <p class="codeblock">
         <span>$</span> pkg install python3
         <br><span>$</span> pip3 install edupage-api
+        <br><span>$</span> pip3 install argparse
     </p>
 
     <p>If you're having issues, first try to run the repo command and choose a working repository, then update and continue with Python's installation.</p>
@@ -148,18 +150,64 @@
     </div>
 
     <br><p>
-        After opening the directory, place the Python (.py) scripts and your login (.json) directly in root
-        <br>Then, create a <span class="codeblock-inline">.termux/tasker</span> subfolder(s). Place the shell (.sh) scripts inside this folder
+        After opening the directory, place the Python (.py) script and your login (.json) directly in root
+        <br>Then, create a <span class="codeblock-inline">.termux/tasker</span> subfolder(s). Place the shell (.sh) script inside this folder
     </p>
 
     <h4>Tasker</h4>
     <p>Open the app and do whatever it asks on setup (idk lol). Then, go to the Tasker Profile link and import the project from Taskernet.</p>
     <br><p>
-        Go to Tasker App info > Permissions > Additional permissions > Run commands in Termux environment and Allow it
+        In your phone's settings, go to Tasker's App info > Permissions > Additional permissions > Run commands in Termux environment and Allow it
     </p>
 
     <h4>AutoNotification</h4>
     <p>Doesn't really need anything except for permissions, just launch it and make sure it works.</p>
+
+    <br><br>
+    <a class="link-anchor" href="#devs"><h2 id="devs">For Developers
+        <iconify-icon icon="akar-icons:link-chain" width="20"></iconify-icon></h2></a>
+
+    <p>You can create your own script for your own school and host it on Github too! I'll make sure to link you here as well.
+        <br>It's also preferable that you make a custom Login JSON, the default one is specific to EduPage (obviously).
+        <br>Maybe your script doesn't need to specify a subdomain, takes an API key, etc.
+    </p>
+    <h4>HOWTO:</h4>
+    <ul>
+        <li><ul> <span class="codeblock-inline">timetable-script.py</span>
+            <li>Takes a required arg <span class="codeblock-inline">--day</span> that is either "today" or "tmr"/"tomorrow"</li>
+            <li>Structure of the return JSON<br><p class="codeblock">
+                {
+                    <br>&emsp;no_school,
+                    <br>&emsp;data,
+                <br>}</p><ul>
+                    <li><span class="highlight-text">no_school:</span> off-day reason (weekend, holiday, etc.) or "false" (as string) if there's classes that day</li>
+                    <li><span class="highlight-text">data:</span> structure below</li>
+                </ul>   
+            </li>
+            <li>Structure of the <span class="codeblock-inline">data</span> part of the JSON<br><p class="codeblock">
+            "data" : {
+                <br>&emsp;"<span>i</span>" : {
+                    <br>&emsp;&emsp;name,
+                    <br>&emsp;&emsp;classroom,
+                    <br>&emsp;&emsp;start,
+                    <br>&emsp;&emsp;end,
+                <br>&emsp;},
+                <br>&emsp;"<span>i+1</span>" : { ... },
+                <br>&emsp;...
+            <br>}</p><ul>
+                <li><span class="codeblock-inline">i</span> is the index of the class (starting from 0). Yes I know, very scuffed, but it's like that because of Tasker</li>
+                <li><span class="highlight-text">name:</span> name of the class. preferably as short as possible (abbreviations)</li>
+                <li><span class="highlight-text">classroom:</span> classroom number or other identification, again as short as possible</li>
+                <li><span class="highlight-text">start and end:</span> time in 24h format. 12h format IS NOT GOING TO WORK!</li>
+            </ul>
+            </li>
+        </ul></li>
+        <li><ul> <span class="codeblock-inline">timetable-script.sh</span>
+            <li>Ideally <span class="highlight-text">the same for all scripts!</span> Don't modify unless necessary!</li>
+            <li>You'd have to provide pretty complex additional instructions to the user if you want to modify this as this would have to be done within Tasker</li>
+            <li>If you want the user to enter additional information/settings for your script, use the Login JSON if possible</li>
+        </ul></li>
+    </ul>
     
 </body>
 </html>
