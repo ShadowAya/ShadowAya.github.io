@@ -1,0 +1,64 @@
+body {
+    padding: 30px;
+}
+
+h1, h2 {
+    margin: 20px 0 20px 0;
+}
+
+h3, p {
+    color:#a4a4a4;
+    margin-left: 30px;
+}
+
+body > div {
+    display: flex;
+}
+
+a {
+    color:rgb(103, 103, 194)
+}
+
+.match {
+    margin: 30px 30px 0 30px;
+    border: 3px dotted #4a4a4a;
+}
+.match :nth-child(2) > td {
+    border-top: 2px dotted #313131;
+}
+.match td {
+    padding: 5px;
+    min-width: 200px;
+}
+
+.cell-tbd {
+    color: #6c6c6c
+}
+
+.info {
+    border: 5px dotted #2e2e2e;
+    margin: 50px;
+    padding: 20px 20px 40px 20px;
+    min-width: 500px;
+}
+.info p {
+    color: rgb(209, 209, 209);
+    margin: 0;
+    padding: 0;
+}
+
+.hl1 {
+    font-weight: 800;
+    font-size: larger;
+}
+
+.hl2 {
+    font-weight: 800;
+}
+
+.gold {color: rgb(255, 219, 12);}
+.silver {color: rgb(255, 248, 227);}
+.bronze {color: rgb(255, 100, 34);}
+.green {color: rgb(95, 255, 95)}
+
+.sub1 {color:#6c6c6c}
