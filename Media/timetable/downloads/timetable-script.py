@@ -27,27 +27,29 @@ elif args.day == "tmr" or args.day == "tomorrow" :
 else :
     raise Exception("Invalid day specified")
 
-if lessons_fetch[0].start_of_lesson.strftime("%H%M") == "0000" and lessons_fetch[-1].end_of_lesson.strftime("%H%M") == "0000" :
-    no_school = lessons_fetch[0].name
-else :
-
-    for lesson in lessons_fetch :
-        if lesson.name is None :
-            continue
-        lessons[f'{loop}'] = {
-            "name" : lesson.name if len(lesson.name)<17 else f'{lesson.name[:15]}...',
-            "classroom" : ", ".join(lesson.classrooms) if len(lesson.classrooms)>0 else "-",
-            "start" : lesson.start_of_lesson.strftime("%H:%M"),
-            "end" : lesson.end_of_lesson.strftime("%H:%M")
-        }
-        loop += 1
-
-if len(lessons) == 0 and no_school=="false" :
+if len(lessons) == 0 :
     weekday_num = datetime.now().weekday()
     if weekday_num > 4 :
         no_school = 'Weekend'
     else :
         no_school = 'No classes'
+
+else :
+
+    if lessons_fetch[0].start_of_lesson.strftime("%H%M") == "0000" and lessons_fetch[-1].end_of_lesson.strftime("%H%M") == "0000" :
+        no_school = lessons_fetch[0].name
+    else :
+
+        for lesson in lessons_fetch :
+            if lesson.name is None :
+                continue
+            lessons[f'{loop}'] = {
+                "name" : lesson.name if len(lesson.name)<17 else f'{lesson.name[:15]}...',
+                "classroom" : ", ".join(lesson.classrooms) if len(lesson.classrooms)>0 else "-",
+                "start" : lesson.start_of_lesson.strftime("%H:%M"),
+                "end" : lesson.end_of_lesson.strftime("%H:%M")
+            }
+            loop += 1
 
 print({
     "no_school" : no_school,
