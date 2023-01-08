@@ -21,20 +21,15 @@ lessons = {}
 no_school = "false"
 
 if args.day == "today" :
-    lessons_fetch = edupage.get_timetable(datetime.today()).lessons
+    selected_time = datetime.today()
 elif args.day == "tmr" or args.day == "tomorrow" :
-    lessons_fetch = edupage.get_timetable(datetime.today() + timedelta(days = 1)).lessons
+    selected_time = datetime.today() + timedelta(days = 1)
 else :
     raise Exception("Invalid day specified")
 
-if len(lessons) == 0 :
-    weekday_num = datetime.now().weekday()
-    if weekday_num > 4 :
-        no_school = 'Weekend'
-    else :
-        no_school = 'No classes'
+lessons_fetch = edupage.get_timetable(selected_time).lessons
 
-else :
+if len(lessons_fetch) > 0 :
 
     if lessons_fetch[0].start_of_lesson.strftime("%H%M") == "0000" and lessons_fetch[-1].end_of_lesson.strftime("%H%M") == "0000" :
         no_school = lessons_fetch[0].name
@@ -50,6 +45,13 @@ else :
                 "end" : lesson.end_of_lesson.strftime("%H:%M")
             }
             loop += 1
+
+if len(lessons) == 0 :
+    weekday_num = selected_time.weekday()
+    if weekday_num > 4 :
+        no_school = 'Weekend'
+    else :
+        no_school = 'No classes'
 
 print({
     "no_school" : no_school,
