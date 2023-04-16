@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monmon Bot Dokumentace</title>
+    <link rel="icon" type="image/x-icon" href="../Media/logo.png">
+
+    <script src="../nodarkreader.min.js"></script>
+
+    <link rel="stylesheet" href="../Styles/all.css">
+    <link rel="stylesheet" href="../Styles/monmonbot.css">
+
+    <script defer src="../Scripts/monmonbot.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+</head>
+<body>
+
+    <section id="nav">
+        <div class="nav-items">
+            <a
+                draggable='false'
+                id="categories"
+            ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 17h8m-8-5h14m-8-5h8"/></svg></a>
+            <a 
+                draggable='false'
+                href="#intro"
+                data-lang-cs="Úvod"
+                data-lang-en="Introduction"
+            ></a>
+            <a  
+                draggable='false'
+                href="#general-commands"
+                data-lang-cs="Nezařazené"
+                data-lang-en="Uncategorized"
+            ></a>
+            <a  draggable='false' href="#rolegroups">Rolegroups</a>
+            <a draggable='false' href="#giveaways">Giveaways</a>
+            <a draggable='false' href="#multimessages">Multimessages</a>
+            <a draggable='false' href="#selfroles">Selfroles</a>
+            <a draggable='false' href="#singleroles">Singleroles</a>
+        </div>
+        <div class="language-switcher" id="language-switcher">
+            <img src="../Media/flags/en-flag.png" alt="English" data-lang="en" class="flag-icon" draggable='false'>
+            <img src="../Media/flags/cz-flag.png" alt="Čeština" data-lang="cs" class="flag-icon active" draggable='false'>
+        </div>
+    </section>
+
+    <h1
+        id="intro"
+        data-lang-cs="<img src='../Media/mon-hlava.png' draggable='false'> Úvod"
+        data-lang-en="<img src='../Media/mon-hlava.png' draggable='false'> Introduction"
+    ></h1>
+    <p
+        data-lang-cs=
+        "Monmon Bot poskytuje nástroje administrátorům komunitního serveru a některé funkce i jeho uživatelům.<br><br>
+        Jeho hlavními funkcemi jsou <b>uskupení uživatelů (rolegroups)</b> a <b>sdílené zprávy (multimessages)</b>.<br>
+        Bot dokáže pořádat losování o <b>odměny (giveaways)</b>.<br>
+        Jeho další funkce je registrace na <b>Minecraft server 'Kraftmon'</b>."
+        data-lang-en=
+        "Monmon Bot provides tools for community server administrators and some features for its users.<br><br>
+        Its main features are <b>user grouping (rolegroups)</b> and <b>shared messages (multimessages)</b>.<br>
+        The bot can conduct <b>giveaways</b>.<br>
+        Its next feature are registrations for the <b>Minecraft server 'Kraftmon'</b>."
+    ></p>
+
+
+    <h1
+        id="general-commands"
+        data-lang-cs="Nezařazené"
+        data-lang-en="Uncategorized"
+    ></h1>
+    <p
+        data-lang-cs=
+        "Tato skupina obsahuje nezařazené příkazy s obecnou funkcionalitou."
+        data-lang-en=
+        "This group contains uncategorized commands with general functionality."
+    ></p>
+
+    <div class="command">
+        <p>
+            /ping
+        </p>
+        <p
+            data-lang-cs=
+            "Pingne bota. Zobrází jeho prodlevu."
+            data-lang-en=
+            "Pings the bot. Displays its latency."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /help
+            <label><popup
+                data-lang-cs="(Textový výběr)<br> Pomocný článek k zobrazení"
+                data-lang-en="(Text select)<br> The help article to show"
+            ></popup>article</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Obsahuje seznam pomocných článků s popisem funkcí bota."
+            data-lang-en=
+            "Includes a list of help articles with descriptions of the bot's functions."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /dtg
+        </p>
+        <p
+            data-lang-cs=
+            "Odkazuje na tento web na nástroj na generování časových razítek. Lze nalézt <a href='https://shadowaya.github.io/dtg/'>zde</a>."
+            data-lang-en=
+            "Links to this site to a tool for generating timestamps. Can be found <a href='https://shadowaya.github.io/dtg/'>here</a>."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /insult
+            <label><popup
+                data-lang-cs="(Zmínka uživatele)<br> Uživatel k uražení"
+                data-lang-en="(User mention)<br> The user to insult"
+            ></popup>user</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Příkaz, co si vystřelí z vybraného uživatele."
+            data-lang-en=
+            "A command that makes fun of the selected user."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /kraftmon register
+        </p>
+        <p
+            data-lang-cs=
+            "Tímto příkazem se registruje na Minecraft server Kraftmon. Pro registraci musí mít uživatel specíalní pravomoci."
+            data-lang-en=
+            "This command registers you to the Kraftmon Minecraft server. To register, the user must have special permissions."
+        ></p>
+    </div>
+
+    <h1
+        id="rolegroups"
+        data-lang-cs="Rolegroups (skupiny uživatelů)"
+        data-lang-en="Rolegroups"
+    ></h1>
+    <p
+        data-lang-cs=
+        "Rolegroup seskupuje role a uživatele.<br><br>
+        Tyto skupiny jsou využívány v mnoha místech:<br>
+        ⠀•⠀Multimessage oprávnění<br>
+        ⠀•⠀Oprávnění komponentů multimessage<br>
+        ⠀•⠀Giveaway výherní šance<br>
+        ⠀⠀⠀a další...<br><br>
+        Skupiny mohou spravovat a nastavovat jako oprávnění pouze administrátoři.<br>
+        Všechny Rolegroup argumenty mají našeptávání."
+        data-lang-en=
+        "A rolegroup groups up roles and users.<br><br>
+        These groups are utilized in many places:<br>
+        ⠀•⠀Multimessage permissions<br>
+        ⠀•⠀Permissions of multimessage components<br>
+        ⠀•⠀Giveaway odds multiplier<br>
+        ⠀⠀⠀and more...
+        <br><br>
+        Groups can only be managed and set as permissions by administrators.<br>
+        All Rolegroup arguments have an autocompleter."
+    ></p>
+
+    <div class="command">
+        <p>
+            /rolegroup new
+        </p>
+        <p
+            data-lang-cs=
+            "Vytvoří novou skupinu uživatelů. Využívá collector sbírající Label (název) a Group members (členy skupiny). Všechny hodnoty jsou povinné."
+            data-lang-en=
+            "Creates a new user group. Utilizes a collector that collects Label and Group members. All values are required."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /rolegroup edit
+            <label><popup
+                data-lang-cs="(Rolegroup)<br> Skupina k úpravě"
+                data-lang-en="(Rolegroup)<br> Group to edit"
+            ></popup>group</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Upraví existující skupinu. Využívá stejný collector. Hodnoty nejsou povinné a mění se jen ty zadané."
+            data-lang-en=
+            "Modifies an existing group. Utilizes the same collector. Values are not required and only the specified ones get changed."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /rolegroup delete
+            <label><popup
+                data-lang-cs="(Rolegroup)<br> Skupina k odstranění"
+                data-lang-en="(Rolegroup)<br> Group to delete"
+            ></popup>group</label>
+            <label><popup
+                data-lang-cs="(Text)<br> Potvrzení"
+                data-lang-en="(Text)<br> Confirmation"
+            ></popup>confirmation</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Vymaže existující skupinu.<br>
+            Confirmation argument slouží jako opatření proti neúmyslnému smazání, očekává vstup 'confirm' nebo 'yes'."
+            data-lang-en=
+            "Deletes an existing group.<br>
+            The confirmation argument serves as a precaution against unintentional deletion, expects 'confirm' or 'yes' as input."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /rolegroup permissions
+            <label><popup
+                data-lang-cs="(Rolegroup)<br> Skupina k úpravě"
+                data-lang-en="(Rolegroup)<br> Group to modify"
+            ></popup>group</label>
+            <label><popup
+                data-lang-cs="(Speciální oprávnění)<br> Nastavované oprávnění"
+                data-lang-en="(Special permission)<br> Adjusted permission"
+            ></popup>permission</label>
+            <label><popup
+                data-lang-cs="(Textový výběr)<br> 'add' (přidat) nebo 'remove' (odstranit)"
+                data-lang-en="(Text select)<br> 'add' or 'remove'"
+            ></popup>action</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Přiděluje nebo odstraňuje oprávnění určité skupině."
+            data-lang-en=
+            "It grants or revokes a permission to a particular group."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /rolegroup display
+            <label><popup
+                data-lang-cs="(Rolegroup)<br> Skupina k zobrazení"
+                data-lang-en="(Rolegroup)<br> Group to display"
+            ></popup>group</label>
+            <label><popup
+                data-lang-cs="(Volitelné) (Pravda/Nepravda)<br> Mód zobrazení"
+                data-lang-en="(Optional) (True/False)<br> Viewing mode"
+            ></popup>hidden</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Vypíše detaily skupiny do přílohy jako embed.
+            Pokud uživatel nespecifikuje argumentem hidden, tak je zpráva skryta.
+            Obsahuje seznam rolí, uživatelů ve skupině a její oprávnění."
+            data-lang-en=
+            "Writes the group details to an attachment as an embed.
+            If the user does not specify the hidden argument, the message is hidden.
+            It lists the roles, users in the group and its permissions."
+        ></p>
+    </div>
+
+    <h1
+        id="giveaways"
+        data-lang-cs="Giveaways (losování odměn)"
+        data-lang-en="Giveaways"
+    ></h1>
+
+    <p
+        data-lang-cs=
+        "Giveawaye za vás losují odměny. Fungují obvyklým způsobem s dalšími možnostmi:<br>
+        ⠀•⠀Šance pro specifikované skupiny<br>
+        ⠀•⠀Soukromé giveawaye, tedy umožnění výhry pouze definovaným skupinám<br>
+        ⠀⠀⠀K tomu použijte multipliery. Při soukromém losování je multiplier pro každého ve výchozím nastavení nulový.<br><br>
+        K účasti, úpravám a opětovnému slosování giveawaye existují zvláštní oprávnění.<br>
+        Giveawaye lze znovu losovat (re-roll). V re-roll příkazu můžete zadat libovolné množství výherců, i když původně bylo jiné.<br>
+        Všechny Giveaway argumenty mají našeptávání."
+        data-lang-en=
+        "Giveaways give out rewards for you. They work in the usual way, with additional options:<br>
+        ⠀•⠀Multipliers for specific rolegroups<br>
+        ⠀•⠀Private giveaways, aka only allowing defined rolegroups to win<br>
+        ⠀⠀⠀Use multipliers to do this. Basically in a private giveaway, multiplier for everyone is zero by default<br><br>
+        There are special permissions for joining, editing and rerolling a giveaway.<br>
+        Giveaways can be re-rolled. In the re-roll command, you can specify any amount of winners,
+        even if originally the amount was different.<br>
+        All Giveaway arguments have an autocompleter."
+    ></p>
+
+    <div class="command">
+        <p>
+            /giveaway new
+        </p>
+        <p
+            data-lang-cs=
+            "Vytvoří nový giveaway.
+            Využívá collector sbírající Label (název),
+            Description (popisek), End time (čas vyhodnocení),
+            Winner count (počet výherců mezi 1 a 30),
+            Multipliers (nastavení specifických výherních šancí pro skupiny),
+            Public/Private (jestli má být výchozí multiplier jedna nebo ne, v podstatě určuje možnost účastnit se všem, nebo ne)."
+            data-lang-en=
+            "Creates a new giveaway. Utilizes a collector that collects Label, Description, Winner count (between 1 and 30),
+            Multipliers (setting specific chances for rolegroups),
+            Public/Private (whether the default multiplier should be one or not, basically determines whether or not everyone can participate).
+            "
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /giveaway edit
+            <label><popup
+                data-lang-cs="(Giveaway)<br> Giveaway k úpravě"
+                data-lang-en="(Giveaway)<br> Giveaway to edit"
+            ></popup>giveaway</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Upraví existující giveaway. Využívá stejný collector. Hodnoty nejsou povinné a mění se jen ty zadané."
+            data-lang-en=
+            "Modifies an existing giveaway. Utilizes the same collector. Values are not required and only the specified ones get changed."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /giveaway delete
+            <label><popup
+                data-lang-cs="(Giveaway)<br> Giveaway k odstranění"
+                data-lang-en="(Giveaway)<br> Giveaway to delete"
+            ></popup>group</label>
+            <label><popup
+                data-lang-cs="(Text)<br> Potvrzení"
+                data-lang-en="(Text)<br> Confirmation"
+            ></popup>confirmation</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Vymaže existující giveaway.<br>
+            Confirmation argument slouží jako opatření proti neúmyslnému smazání, očekává vstup 'confirm' nebo 'yes'."
+            data-lang-en=
+            "Deletes an existing giveaway.<br>
+            The confirmation argument serves as a precaution against unintentional deletion, expects 'confirm' or 'yes' as input."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /giveaway find
+            <label><popup
+                data-lang-cs="(Giveaway)<br> Giveaway k nalezení"
+                data-lang-en="(Giveaway)<br> Giveaway to find"
+            ></popup>giveaway</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Vyhledá giveaway. Pošle uživateli odkaz na jeho zprávu."
+            data-lang-en=
+            "Finds a giveaway. Sends the user a link to its message."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /giveaway reroll
+            <label><popup
+                data-lang-cs="(Giveaway)<br> Giveaway k losování"
+                data-lang-en="(Giveaway)<br> Giveaway to roll"
+            ></popup>giveaway</label>
+            <label><popup
+                data-lang-cs="(Volitelné) (Číslo)<br> Počet výherců"
+                data-lang-en="(Optional) (Number)<br> Winner count"
+            ></popup>amount</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Znovu zvolí výherce. Pomocí argumentu amount lze specifikovat vlastní počet výherců."
+            data-lang-en=
+            "Chooses the winners again. Using the argument amount, you can specify your own winner count."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /giveaway rebuild
+            <label><popup
+                data-lang-cs="(Giveaway)<br> Giveaway k vystavění"
+                data-lang-en="(Giveaway)<br> Giveaway to build"
+            ></popup>giveaway</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Při poškození giveawaye (smazání jeho zprávy) lze zprávu znovu postavit. Všechna data jsou obnovena z databáze."
+            data-lang-en=
+            "If the giveaway is damaged (its message is deleted), the message can be rebuilt.
+            All data is recovered from the database."
+        ></p>
+    </div>
+
+    <h1
+        id="multimessages"
+        data-lang-cs="Multimessages (společné zprávy)"
+        data-lang-en="Multimessages"
+    ></h1>
+
+    <p
+        data-lang-cs=
+        "Multimessages jsou speciální bot zprávy<br>
+        ⠀•⠀Může je vytvořit a nakonfigurovat správce<br>
+        ⠀•⠀Upravování/přístup k nim mají definované skupiny<br>
+        ⠀⠀⠀a další...<br><br>
+        Tyto zprávy může upravovat více uživatelů.
+        Mohou v nich být umístěné i další komponenty.<br>
+        Všechny Multimessage argumenty mají našeptávání."
+        data-lang-en=
+        "Multimessages are special bot messages.<br>
+        ⠀•⠀They can be created and configured by an administrator<br>
+        ⠀•⠀They can be accessed/edited by defined rolegroups<br><br>
+        These messages are made to be editable by multiple users.<br>
+        All Multimessage arguments have an autocompleter."
+    ></p>
+
+    <div class="command">
+        <p>
+            /multimessage new
+            <label><popup
+                data-lang-cs="(Volitelné) (Číslo)<br> Počet zpráv"
+                data-lang-en="(Optional) (Number)<br> Message count"
+            ></popup>count</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Vytvoří novou multimessage. Argumentem count lze definovat počet jednotlivých zpráv mezi 1 a 8, výchozí hodnota je 1."
+            data-lang-en=
+            "Creates a new multimessage. The count argument can be used to define the amount of individual messages between 1 and 8,
+            the default value is 1."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /multimessage edit
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Zprávy k úpravě"
+                data-lang-en="(Multimessage)<br> Messages to edit"
+            ></popup>messages</label>
+            <label><popup
+                data-lang-cs="(Číslo)<br> Jednotlivá zpráva podle indexu"
+                data-lang-en="(Number)<br> Individual message by index"
+            ></popup>index</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Upraví specifickou multimessage zprávu. Používá modal na zadání hodnoty."
+            data-lang-en=
+            "Modifies a specific multimessage message. Uses a modal to get the value."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /multimessage delete
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Multimessage k odstranění"
+                data-lang-en="(Multimessage)<br> Multimessage to delete"
+            ></popup>messages</label>
+            <label><popup
+                data-lang-cs="(Text)<br> Potvrzení"
+                data-lang-en="(Text)<br> Confirmation"
+            ></popup>confirmation</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Vymaže existující multimessage.<br>
+            Confirmation argument slouží jako opatření proti neúmyslnému smazání, očekává vstup 'confirm' nebo 'yes'."
+            data-lang-en=
+            "Deletes an existing multimessage.<br>
+            The confirmation argument serves as a precaution against unintentional deletion, expects 'confirm' or 'yes' as input."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /multimessage permissions
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Multimessage k úpravě"
+                data-lang-en="(Multimessage)<br> Multimessage to delete"
+            ></popup>messages</label>
+            <label><popup
+                data-lang-cs="(Pravda/Nepravda)<br> Oprávnění"
+                data-lang-en="(True/False)<br> Permission"
+            ></popup>can_edit</label>
+            <label><popup
+                data-lang-cs="(Rolegroup)<br> Skupina k nastavení"
+                data-lang-en="(Rolegroup)<br> Group to set"
+            ></popup>group</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Nastaví oprávnění skupiny pro tuto multimessage. Tato skupina bude moci zprávu modifikovat, ale ne smazat."
+            data-lang-en=
+            "Sets the permissions of this multimessage. This group will be able to modify the message, but not delete it."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /multimessage get
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Zprávy k vypsání"
+                data-lang-en="(Multimessage)<br> Messages to print"
+            ></popup>messages</label>
+            <label><popup
+                data-lang-cs="(Volitelné) (Číslo)<br> Jednotlivá zpráva podle indexu"
+                data-lang-en="(Optional) (Number)<br> Individual message by index"
+            ></popup>index</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Vypíše specifickou multimessage zprávu. Vypíše buď celou multimessage, nebo zprávu specifikovanou argumentem index."
+            data-lang-en=
+            "Prints a specific multimessage message.
+            Prints either the whole multimessage or the one message specified by the index argument."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /multimessage alias
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Multimessage k úpravě"
+                data-lang-en="(Multimessage)<br> Multimessage to delete"
+            ></popup>messages</label>
+            <label><popup
+                data-lang-cs="(Text)<br> Nové pojmenování"
+                data-lang-en="(Text)<br> New label"
+            ></popup>alias</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Změní pojmenování multimessage v databázi. Pro lepší našeptávání/organizaci.
+            Bez nastavení aliasu je pojmenování automaticky generováno podle obsahu zprávy."
+            data-lang-en=
+            "Changes the multimessage's alias in the database. For better autocompleter/organization.
+            Without setting a aliasu, the naming is automatically generated according to the content of the message."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /multimessage display
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Multimessage k zobrazení"
+                data-lang-en="(Multimessage)<br> Multimessage to display"
+            ></popup>messages</label>
+            <label><popup
+                data-lang-cs="(Volitelné) (Pravda/Nepravda)<br> Mód zobrazení"
+                data-lang-en="(Optional) (True/False)<br> Viewing mode"
+            ></popup>hidden</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Vypíše detaily multimessage do přílohy jako embed.
+            Pokud uživatel nespecifikuje argumentem hidden, tak je zpráva skryta.
+            Obsahuje odkaz na zprávu, její nastavená oprávnění, seznam zpráv a jaké jsou zde nastavené komponenty."
+            data-lang-en=
+            "Writes the multimessage details to an attachment as an embed.
+            If the user does not specify the hidden argument, the message is hidden.
+            It lists a link to the message, its set permissions, a list of messages and what components are set there."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /multimessage rebuild
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Multimessage k vystavění"
+                data-lang-en="(Multimessage)<br> Multimessage to build"
+            ></popup>messages</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Při poškození multimessage (smazání nékterých jejích zpráv) lze multimessage znovu postavit.
+            Všechna data až na obsah jsou obnovena z databáze.
+            Staré zprávy jsou smazány, ale před jejich odstraněním je bot přepošle, aby nedošlo ke ztrátě dat."
+            data-lang-en=
+            "If the multimessage is damaged (some of its messages are deleted), the multimessage can be rebuilt.
+            All data except the contents is recovered from the database.
+            Old messages are deleted, but the bot resends them before deletion to prevent data loss."
+        ></p>
+    </div>
+    
+
+    <h1
+        id="selfroles"
+        data-lang-cs="Selfroles (menu rolí)"
+        data-lang-en="Selfroles (role menus)"
+    ></h1>
+
+    <p
+        data-lang-cs=
+        "Multimessage komponent. Menu rolí obsahující maximálně 25 rolí pro uživatele k vybrání.<br>
+        Lze nastavit maximální počet výběrů a oprávnění."
+        data-lang-en=
+        "Multimessage component. A role menu containing a maximum of 25 roles for the user to select.<br>
+        The maximum number of selections and permissions can be set."
+    ></p>
+
+    <div class="command">
+        <p>
+            /selfroles set
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Targetovaná multimessage"
+                data-lang-en="(Multimessage)<br> Target multimessage"
+            ></popup>multimessage</label>
+            <label><popup
+                data-lang-cs="(Číslo)<br> Targetovaná zpráva podle indexu"
+                data-lang-en="(Number)<br> Target message by index"
+            ></popup>index</label>
+            <label><popup
+                data-lang-cs="(Zmínka role)<br> Role k nastavení"
+                data-lang-en="(Role mention)<br> Role to set"
+            ></popup>role</label>
+            <label><popup
+                data-lang-cs="(Volitelné) (Text)<br> Název role v menu"
+                data-lang-en="(Optional) (Text)<br> Name of this role in the menu"
+            ></popup>alias</label>
+            <label><popup
+                data-lang-cs="(Volitelné) (Text)<br> Popisek role v menu"
+                data-lang-en="(Optional) (Text)<br> Description of this role in the menu"
+            ></popup>description</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Přidá roli do menu selfrolí. Při přidání bez argumentu alias se role pojmenuje
+            podle jejího názvu na serveru. Pro změnu názvu a popisku role na ni lze opětovně použít tento příkaz."
+            data-lang-en=
+            "Adds a role to the selfroles menu. When added without the alias argument,
+            the role is named according to its name on the server.
+            To change the alias and description of the role, you can use this command again."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /selfroles unset
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Targetovaná multimessage"
+                data-lang-en="(Multimessage)<br> Target multimessage"
+            ></popup>multimessage</label>
+            <label><popup
+                data-lang-cs="(Číslo)<br> Targetovaná zpráva podle indexu"
+                data-lang-en="(Number)<br> Target message by index"
+            ></popup>index</label>
+            <label><popup
+                data-lang-cs="(Zmínka role)<br> Role k odstranění"
+                data-lang-en="(Role mention)<br> Role to unset"
+            ></popup>role</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Odstraní roli ze menu selfrolí."
+            data-lang-en=
+            "Unsets a role from the selfroles menu."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /selfroles clear
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Targetovaná multimessage"
+                data-lang-en="(Multimessage)<br> Target multimessage"
+            ></popup>multimessage</label>
+            <label><popup
+                data-lang-cs="(Číslo)<br> Targetovaná zpráva podle indexu"
+                data-lang-en="(Number)<br> Target message by index"
+            ></popup>index</label>
+            <label><popup
+                data-lang-cs="(Textový výběr)<br> Rozsah, 'full pool' (celé menu) nebo 'permissions only' (jen oprávnění)"
+                data-lang-en="(Text select)<br> 'full pool' or 'permissions only'"
+            ></popup>scope</label>
+            <label><popup
+                data-lang-cs="(Text)<br> Potvrzení"
+                data-lang-en="(Text)<br> Confirmation"
+            ></popup>confirmation</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Odstraní celé menu selfrolí.<br>
+            Confirmation argument slouží jako opatření proti neúmyslnému smazání, očekává vstup 'confirm' nebo 'yes'."
+            data-lang-en=
+            "Clears the whole selfroles menu.<br>
+            The confirmation argument serves as a precaution against unintentional deletion, expects 'confirm' or 'yes' as input."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /selfroles permissions
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Targetovaná multimessage"
+                data-lang-en="(Multimessage)<br> Target multimessage"
+            ></popup>multimessage</label>
+            <label><popup
+                data-lang-cs="(Číslo)<br> Targetovaná zpráva podle indexu"
+                data-lang-en="(Number)<br> Target message by index"
+            ></popup>index</label>
+            <label><popup
+                data-lang-cs="(Rolegroup)<br> Skupina k nastavení"
+                data-lang-en="(Rolegroup)<br> Group to set"
+            ></popup>rolegroup</label>
+            <label><popup
+                data-lang-cs="(Pravda/Nepravda)<br> Oprávnění"
+                data-lang-en="(True/False)<br> Permission"
+            ></popup>can_get_roles</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Nastaví pravomoce pro skupiny. Jakmile se nastaví první pravomoce,
+            tak si z tohoto menu mohou role vybírat jen povolené skupiny.
+            U takto nenastavených selfrolí si tedy z menu může vybrat roli každý."
+            data-lang-en=
+            "Sets the permissions for groups. Once the first permission is set,
+            only the allowed groups can select roles from this menu.
+            So for selfroles which are not set up this way, anyone can select a role from the menu."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /selfroles limit
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Targetovaná multimessage"
+                data-lang-en="(Multimessage)<br> Target multimessage"
+            ></popup>multimessage</label>
+            <label><popup
+                data-lang-cs="(Číslo)<br> Targetovaná zpráva podle indexu"
+                data-lang-en="(Number)<br> Target message by index"
+            ></popup>index</label>
+            <label><popup
+                data-lang-cs="(Číslo)<br> Maximální počet"
+                data-lang-en="(Number)<br> Maximum amount"
+            ></popup>max</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Nastaví maximální limit, kolik rolí si může uživatel vybrat v tomto menu.
+            Výchozí hodnota je 1 a maximální je 25 (to v podstatě znamená 'libovolný počet')."
+            data-lang-en=
+            "Sets the maximum limit on how many roles the user can select in this menu.
+            The default is 1 and the maximum is 25 (this basically means 'any amount')"
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /selfroles display
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Targetovaná multimessage"
+                data-lang-en="(Multimessage)<br> Target multimessage"
+            ></popup>multimessage</label>
+            <label><popup
+                data-lang-cs="(Číslo)<br> Targetovaná zpráva podle indexu"
+                data-lang-en="(Number)<br> Target message by index"
+            ></popup>index</label>
+            <label><popup
+                data-lang-cs="(Volitelné) (Pravda/Nepravda)<br> Mód zobrazení"
+                data-lang-en="(Optional) (True/False)<br> Viewing mode"
+            ></popup>hidden</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Vypíše detaily selfroles do přílohy jako embed.
+            Pokud uživatel nespecifikuje argumentem hidden, tak je zpráva skryta.
+            Obsahuje odkaz na zprávu, její nastavená práva, limit a nastavené role (s jejich detaily)."
+            data-lang-en=
+            "Writes the selfroles details to an attachment as an embed.
+            If the user does not specify the hidden argument, the message is hidden.
+            It lists a link to the message, its set permissions, the limit and the set roles (with details)."
+        ></p>
+    </div>
+
+
+    <h1
+        id="singleroles"
+        data-lang-cs="Singleroles (tlačítka rolí)"
+        data-lang-en="Singleroles (role buttons)"
+    ></h1>
+
+    <p
+        data-lang-cs=
+        "Multimessage komponent. Tlačítka pro vybírání rolí. Jedna zpráva obsahuje maximálně 20 tlačítek.<br>
+        Tlačítko lze nastavit jako přepínací (roli si lze přidělit i odebrat) nebo jednorázové (roli si lze jen přidělit).<br>
+        Lze nastavit oprávnění."
+        data-lang-en=
+        "Multimessage component. Buttons for selecting roles. One message contains a maximum of 20 buttons.<br>
+        The button can be set as a toggle button (role can be assigned and removed) or a one-time button (role can only be assigned).<br>
+        Permissions can be set."
+    ></p>
+
+    <div class="command">
+        <p>
+            /singlerole set
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Targetovaná multimessage"
+                data-lang-en="(Multimessage)<br> Target multimessage"
+            ></popup>multimessage</label>
+            <label><popup
+                data-lang-cs="(Číslo)<br> Targetovaná zpráva podle indexu"
+                data-lang-en="(Number)<br> Target message by index"
+            ></popup>index</label>
+            <label><popup
+                data-lang-cs="(Zmínka role)<br> Role k nastavení"
+                data-lang-en="(Role mention)<br> Role to set"
+            ></popup>role</label>
+            <label><popup
+                data-lang-cs="(Volitelné) (Text)<br> Název role v menu"
+                data-lang-en="(Optional) (Text)<br> Name of this role in the menu"
+            ></popup>alias</label>
+            <label><popup
+                data-lang-cs="(Volitelné) (Pravda/Nepravda)<br> Mód tlačítka"
+                data-lang-en="(Optional) (True/False)<br> Button mode"
+            ></popup>once</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Přidá tlačítko singlerole. Při přidání bez argumentu alias se role pojmenuje
+            podle jejího názvu na serveru. Pro změnu názvu a módu role na ni lze opětovně použít tento příkaz.
+            Pomocí argumentu once lze nastavit, jestli je role pouze k jednorázovému přidělení,
+            nebo si ji opětovným stisknutím lze i odebrat."
+            data-lang-en=
+            "Adds a singlerole button. When added without the alias argument,
+            the role is named according to its name on the server.
+            To change the alias and once mode of the role, you can use this command again.
+            The once argument can be used to set whether the role is
+            only available for one-time assignment or can be removed by pressing the button again."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /singlerole unset
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Targetovaná multimessage"
+                data-lang-en="(Multimessage)<br> Target multimessage"
+            ></popup>multimessage</label>
+            <label><popup
+                data-lang-cs="(Číslo)<br> Targetovaná zpráva podle indexu"
+                data-lang-en="(Number)<br> Target message by index"
+            ></popup>index</label>
+            <label><popup
+                data-lang-cs="(Zmínka role)<br> Role k odstranění"
+                data-lang-en="(Role mention)<br> Role to unset"
+            ></popup>role</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Odstraní tlačítko role."
+            data-lang-en=
+            "Unsets a singlerole button."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /singlerole clear
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Targetovaná multimessage"
+                data-lang-en="(Multimessage)<br> Target multimessage"
+            ></popup>multimessage</label>
+            <label><popup
+                data-lang-cs="(Číslo)<br> Targetovaná zpráva podle indexu"
+                data-lang-en="(Number)<br> Target message by index"
+            ></popup>index</label>
+            <label><popup
+                data-lang-cs="(Textový výběr)<br> Rozsah, 'full pool' (celé menu) nebo 'permissions only' (jen oprávnění)"
+                data-lang-en="(Text select)<br> 'full pool' or 'permissions only'"
+            ></popup>scope</label>
+            <label><popup
+                data-lang-cs="(Text)<br> Potvrzení"
+                data-lang-en="(Text)<br> Confirmation"
+            ></popup>confirmation</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Odstraní všechny tlačítka rolí.<br>
+            Confirmation argument slouží jako opatření proti neúmyslnému smazání, očekává vstup 'confirm' nebo 'yes'."
+            data-lang-en=
+            "Clears all the singlerole buttons.<br>
+            The confirmation argument serves as a precaution against unintentional deletion, expects 'confirm' or 'yes' as input."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /singlerole permissions
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Targetovaná multimessage"
+                data-lang-en="(Multimessage)<br> Target multimessage"
+            ></popup>multimessage</label>
+            <label><popup
+                data-lang-cs="(Číslo)<br> Targetovaná zpráva podle indexu"
+                data-lang-en="(Number)<br> Target message by index"
+            ></popup>index</label>
+            <label><popup
+                data-lang-cs="(Rolegroup)<br> Skupina k nastavení"
+                data-lang-en="(Rolegroup)<br> Group to set"
+            ></popup>rolegroup</label>
+            <label><popup
+                data-lang-cs="(Pravda/Nepravda)<br> Oprávnění"
+                data-lang-en="(True/False)<br> Permission"
+            ></popup>can_get_role</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Nastaví pravomoce pro skupiny. Jakmile se nastaví první pravomoce,
+            tak tlačítka mohou použít jen povolené skupiny.
+            U takto nenastavených singlerolí si tedy může tlačítkem vybrat roli každý."
+            data-lang-en=
+            "Sets the permissions for groups. Once the first permission is set,
+            only the allowed groups can use the singlerole buttons.
+            So for singleroles which are not set up this way, anyone can select a role with the button."
+        ></p>
+    </div>
+    <div class="command">
+        <p>
+            /selfroles display
+            <label><popup
+                data-lang-cs="(Multimessage)<br> Targetovaná multimessage"
+                data-lang-en="(Multimessage)<br> Target multimessage"
+            ></popup>multimessage</label>
+            <label><popup
+                data-lang-cs="(Číslo)<br> Targetovaná zpráva podle indexu"
+                data-lang-en="(Number)<br> Target message by index"
+            ></popup>index</label>
+            <label><popup
+                data-lang-cs="(Volitelné) (Pravda/Nepravda)<br> Mód zobrazení"
+                data-lang-en="(Optional) (True/False)<br> Viewing mode"
+            ></popup>hidden</label>
+        </p>
+        <p
+            data-lang-cs=
+            "Vypíše detaily tlačítek rolí do přílohy jako embed.
+            Pokud uživatel nespecifikuje argumentem hidden, tak je zpráva skryta.
+            Obsahuje odkaz na zprávu, její nastavená práva a nastavené role (s jejich detaily, zahrnující mód)."
+            data-lang-en=
+            "Writes the singlerole details to an attachment as an embed.
+            If the user does not specify the hidden argument, the message is hidden.
+            It lists a link to the message, its set permissions and the set roles (with details including mode)."
+        ></p>
+    </div>
+
+
+</body>
+</html>
