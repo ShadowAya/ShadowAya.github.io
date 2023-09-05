@@ -43,13 +43,24 @@
         </p>
         <div>
             <div class="preview">No preview</div>
-            <a class="download-field" href="../Media/ha/anchor-card.js" download="timetable-script.py">
+            <a class="download-field" href="../Media/ha/anchor-card.js" download="anchor-card.js">
                 <div>
                     <iconify-icon icon="charm:download" width="25"></iconify-icon> anchor-card.js
                 </div>
             </a>
         </div>
     </div>
+
+    <br><br>
+    <h2>Installation</h2>
+    <br>
+    <ul>
+        <li>Move the file to your Home Assistant /config/www folder (or into a subfolder). You can use the SSH Add-on</li>
+        <li>Go to Settings > Dashboards > Top Right Menu > Resources</li>
+        <li>
+            Add a resource > URL <span class="opaque">local/(subfolders)/your-card.js</span> as JavaScript module
+        </li>
+    </ul>
     
 </body>
 </html>
