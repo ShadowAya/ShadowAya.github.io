@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="darkreader" content="NO-DARKREADER-PLUGIN" />
+    <script src="../nodarkreader.min.js"></script>
+    
+    <link rel="stylesheet" href="../Styles/all.css">
+    <link rel="stylesheet" href="../Styles/ha.css">
+
+    <script src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
+
+    <title>Timetable</title>
+</head>
+<body>
+
+    <h1>Home Assistant Projects</h1>
+    <br>
+    <p>Here's all my Home Assistant files available to download</p>
+    <br><br><br>
+
+    <a class="link-anchor" href="#anchor"><h2 id="anchor">Anchor Card
+        <iconify-icon icon="akar-icons:link-chain" width="20"></iconify-icon></h2></a>
+        <br>
+    <p>
+        Anchor Card is a custom card for Home Assistant that allows you to link to
+        a specific part of a dashboard. It uses a URL parameter to fire a scroll.
+        (example: <i>lovelace/0?anchor=lights</i>)
+    </p>
+    <br>
+    <div class="grid">
+        <p class="codeblock">
+            type: custom:anchor-card <br>
+            anchor_id: lights <br>
+            <span class="opaque">set a per-page unique identifier. scroll to this card using the url param anchor</span> <br>
+            negative_margin: 13px <br>
+            <span class="opaque">set a negative margin of the card to fix spacing visuals. default is 13px.</span> <br>
+            timeout: 150 <br>
+            <span class="opaque">set a timeout to wait before scrolling to the card. default is 150ms. increase this if other cards take long to render.</span> <br>
+        </p>
+        <div>
+            <div class="preview">No preview</div>
+            <a class="download-field" href="../Media/ha/anchor-card.js" download="timetable-script.py">
+                <div>
+                    <iconify-icon icon="charm:download" width="25"></iconify-icon> anchor-card.js
+                </div>
+            </a>
+        </div>
+    </div>
+    
+</body>
+</html>
